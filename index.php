@@ -1,10 +1,24 @@
+<?php
+    session_start();
+    include 'includes/config/database.php';
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $content = $_POST['content'];
+        
+        $stmt = $pdo->prepare("INSERT INTO tweets (user_id, content) VALUES (:user_id, :content)");
+        $stmt->execute(['user_id' => $_SESSION['user_id'], 'content' => $content]);
+        
+        header("Location: index.php");
+    }
+?>
+
+<!DOCTYPE html>
 <main>
     
     <h1>Home</h1>
     <ul>
+        
         <?php
-            session_start();
-            include 'includes/config/database.php';
             
             $stmt = $pdo->prepare("SELECT * FROM tweets ORDER BY created_at DESC");
             $stmt->execute();
@@ -18,6 +32,7 @@
                 echo "<li>{$user['username']} - {$tweet['content']}</li>";
             }
         ?>
+        
     </ul>
     <form method="POST" action="post_tweet.php">
         <label >
