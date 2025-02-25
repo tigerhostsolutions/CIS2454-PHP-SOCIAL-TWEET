@@ -1,5 +1,4 @@
 <?php
-// includes/database.php
     $host = 'localhost';
     $db = 'twitter_clone';
     $user = 'root';
@@ -11,4 +10,4 @@
     } catch (PDOException $e) {
         die("ERROR: Could not connect. " . $e->getMessage());
     }
-?><?php
+

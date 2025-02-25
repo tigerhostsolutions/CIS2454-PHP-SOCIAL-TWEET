@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include 'includes/database.php';
+    include 'includes/config/database.php';
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['email'];
@@ -17,4 +17,25 @@
             echo "Invalid credentials.";
         }
     }
-?><?php
+
+?>
+
+<!DOCTYPE html>
+<main>
+    
+    <h1>Login to Social Tweet</h1>
+    <form method="POST" action="login.php">
+        <label >
+            <input type="email" name="email" placeholder="Email" required>
+        </label >
+        <label >
+            <input type="password" name="password" placeholder="Password" required>
+        </label >
+        <br > <br >
+        <button type="submit" formtarget="_blank">Login</button>
+        <a href = "register.php" >
+            <button type="button" formtarget="_blank">Register</button>
+        </a >
+    </form>
+    
+</main>
