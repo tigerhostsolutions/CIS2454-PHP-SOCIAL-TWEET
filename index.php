@@ -1,7 +1,13 @@
 <?php
     session_start();
     include 'includes/config/database.php';
-
+    
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: login.php");
+    }
+    
+    $username = $_SESSION['username'] ?? 'Guest';
+    
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['content'])) {
         $content = $_POST['content'];
 
@@ -76,9 +82,8 @@
     
   <!DOCTYPE html>
   <main>
-  
-      <h1>Home</h1>
-      <ul>
+
+    <h1>Welcome, <?php echo htmlspecialchars($username); ?>!</h1>      <ul>
   
           <?php
               $stmt = $pdo->prepare("SELECT tweets.*, users.username,
