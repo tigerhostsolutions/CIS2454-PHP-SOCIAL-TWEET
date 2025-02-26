@@ -43,7 +43,7 @@
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['user_id'])) {
         $user_id = $_GET['user_id'];
 
-        $stmt = $pdo->prepare("SELECT users.username FROM follows JOIN users ON follows.follower_id = users.id WHERE follows.followed_id = :user_id");
+        $stmt = $pdo->prepare("SELECT users.username FROM follows JOIN users ON follows.follower_id = users.id WHERE follows.following_id = :user_id");
         $stmt->execute(['user_id' => $user_id]);
         $followers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
