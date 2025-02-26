@@ -1,36 +1,58 @@
 <?php
-        session_start();
-        include 'includes/config/database.php';
+    session_start();
+    include 'includes/config/database.php';
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['content'])) {
+        $content = $_POST['content'];
+
+        $stmt = $pdo->prepare("INSERT INTO tweets (user_id, content) VALUES (:user_id, :content)");
+        $stmt->execute(['user_id' => $_SESSION['user_id'], 'content' => $content]);
+
+        header("Location: index.php");
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like_tweet_id'])) {
+        $tweet_id = $_POST['like_tweet_id'];
+
+        $stmt = $pdo->prepare("INSERT INTO likes (user_id, tweet_id) VALUES (:user_id, :tweet_id)");
+        $stmt->execute(['user_id' => $_SESSION['user_id'], 'tweet_id' => $tweet_id]);
+
+        header("Location: index.php");
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unlike_tweet_id'])) {
+        $tweet_id = $_POST['unlike_tweet_id'];
+
+        $stmt = $pdo->prepare("DELETE FROM likes WHERE user_id = :user_id AND tweet_id = :tweet_id");
+        $stmt->execute(['user_id' => $_SESSION['user_id'], 'tweet_id' => $tweet_id]);
+
+        header("Location: index.php");
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['tweet_id'])) {
+        $tweet_id = $_GET['tweet_id'];
+
+        $stmt = $pdo->prepare("SELECT users.username FROM likes JOIN users ON likes.user_id = users.id WHERE likes.tweet_id = :tweet_id");
+        $stmt->execute(['tweet_id' => $tweet_id]);
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode($users);
+        exit;
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['user_id'])) {
+        $user_id = $_GET['user_id'];
+
+        $stmt = $pdo->prepare("SELECT users.username FROM follows JOIN users ON follows.follower_id = users.id WHERE follows.followed_id = :user_id");
+        $stmt->execute(['user_id' => $user_id]);
+        $followers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode($followers);
+        exit;
+    }
+?>
     
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['content'])) {
-            $content = $_POST['content'];
-    
-            $stmt = $pdo->prepare("INSERT INTO tweets (user_id, content) VALUES (:user_id, :content)");
-            $stmt->execute(['user_id' => $_SESSION['user_id'], 'content' => $content]);
-    
-            header("Location: index.php");
-        }
-    
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like_tweet_id'])) {
-            $tweet_id = $_POST['like_tweet_id'];
-    
-            $stmt = $pdo->prepare("INSERT INTO likes (user_id, tweet_id) VALUES (:user_id, :tweet_id)");
-            $stmt->execute(['user_id' => $_SESSION['user_id'], 'tweet_id' => $tweet_id]);
-    
-            header("Location: index.php");
-        }
-    
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unlike_tweet_id'])) {
-            $tweet_id = $_POST['unlike_tweet_id'];
-    
-            $stmt = $pdo->prepare("DELETE FROM likes WHERE user_id = :user_id AND tweet_id = :tweet_id");
-            $stmt->execute(['user_id' => $_SESSION['user_id'], 'tweet_id' => $tweet_id]);
-    
-            header("Location: index.php");
-        }
-    ?>
-    
-    <!DOCTYPE html>
+   <!DOCTYPE html>
     <main>
     
         <h1>Home</h1>
@@ -59,6 +81,8 @@
                                   <button type='submit'>Like</button>
                               </form>";
                     }
+                    echo "<button onclick='showLikes({$tweet['id']})'>Show Likes</button>";
+                    echo "<ul id='likes-{$tweet['id']}' style='display:none;'></ul>";
                     echo "</li>";
                 }
             ?>
@@ -71,5 +95,69 @@
             <br ><br >
             <button type="submit">Tweet</button>
         </form>
+    
+        <h2>Users</h2>
+        <ul>
+    
+            <?php
+                $stmt = $pdo->prepare("SELECT users.*,
+                                       (SELECT COUNT(*) FROM follows WHERE follows.following_id = users.id AND follows.follower_id = :user_id) AS user_followed
+                                       FROM users
+                                       WHERE users.id != :user_id");
+                $stmt->execute(['user_id' => $_SESSION['user_id']]);
+                $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+                foreach ($users as $user) {
+                    echo "<li>{$user['username']}";
+                    if ($user['user_followed'] > 0) {
+                        echo "<form method='POST' action='index.php' style='display:inline;'>
+                                  <input type='hidden' name='unfollow_user_id' value='{$user['id']}'>
+                                  <button type='submit'>Unfollow</button>
+                              </form>";
+                    } else {
+                        echo "<form method='POST' action='index.php' style='display:inline;'>
+                                  <input type='hidden' name='follow_user_id' value='{$user['id']}'>
+                                  <button type='submit'>Follow</button>
+                              </form>";
+                    }
+                    echo "<button onclick='showFollowers({$user['id']})'>Show Followers</button>";
+                    echo "<ul id='followers-{$user['id']}' style='display:none;'></ul>";
+                    echo "</li>";
+                }
+            ?>
+    
+        </ul>
+    
+        <script>
+            function showLikes(tweetId) {
+                fetch(`index.php?tweet_id=${tweetId}`)
+                    .then(response => response.json())
+                    .then(users => {
+                        const likesList = document.getElementById(`likes-${tweetId}`);
+                        likesList.innerHTML = '';
+                        users.forEach(user => {
+                            const li = document.createElement('li');
+                            li.textContent = user.username;
+                            likesList.appendChild(li);
+                        });
+                        likesList.style.display = 'block';
+                    });
+            }
+    
+            function showFollowers(userId) {
+                fetch(`index.php?user_id=${userId}`)
+                    .then(response => response.json())
+                    .then(users => {
+                        const followersList = document.getElementById(`followers-${userId}`);
+                        followersList.innerHTML = '';
+                        users.forEach(user => {
+                            const li = document.createElement('li');
+                            li.textContent = user.username;
+                            followersList.appendChild(li);
+                        });
+                        followersList.style.display = 'block';
+                    });
+            }
+        </script>
     
     </main>
