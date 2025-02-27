@@ -3,6 +3,8 @@
 session_start();
 include 'includes/config/database.php';
 
+$pdo = Database::getConnection(); // Initialize the $pdo variable
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -23,20 +25,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <main>
-    
-    <h1>Login to Social Tweet</h1>
     <form method="POST" action="login.php">
-        <label >
+        <label>
             <input type="email" name="email" placeholder="Email" required>
-        </label >
-        <label >
+        </label>
+        <label>
             <input type="password" name="password" placeholder="Password" required>
-        </label >
-        <br > <br >
-        <button type="submit" formtarget="_blank">Login</button>
-        <a href = "register.php" >
-            <button type="button" formtarget="_blank">Register</button>
-        </a >
+        </label>
+        <br><br>
+        <button type="submit">Login</button>
+        <a href="register.php">
+            <button type="button">Register</button>
+        </a>
     </form>
-    
 </main>
