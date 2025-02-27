@@ -1,6 +1,7 @@
 <?php
+    global $pdo;
     session_start();
-    include 'includes/config/database.php';
+    include 'models/Database.php';
     
     $tweets = $pdo->query("SELECT tweets.*, users.username FROM tweets JOIN users ON tweets.user_id = users.id ORDER BY tweets.created_at DESC");
     foreach ($tweets as $tweet) {

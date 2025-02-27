@@ -1,5 +1,8 @@
 <?php
-        include_once 'models/Tweet.php';
+    
+    use models\Database;
+    
+    include_once 'models/Tweet.php';
         include_once 'models/Like.php';
         include_once 'models/User.php';
         
@@ -12,6 +15,8 @@
                 }
         
                 $username = $_SESSION['username'] ?? 'Guest';
+                $userId = $_SESSION['user_id'];
+                $tweets = Tweet::getAll($userId);
         
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if (isset($_POST['content'])) {
@@ -34,6 +39,7 @@
                 }
         
                 include 'views/tweets.php';
+                
             }
         
             private static function createTweet() {

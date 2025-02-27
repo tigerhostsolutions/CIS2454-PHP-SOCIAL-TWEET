@@ -1,6 +1,9 @@
 <?php
+    global $pdo;
     session_start();
-    include 'includes/config/database.php';
+    $baseDir = __DIR__ . '/';
+    
+    include $baseDir . 'models/Database.php';
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = $_POST['username'];
@@ -14,11 +17,11 @@
         $_SESSION['user_id'] = $pdo->lastInsertId();
         header("Location: index.php");
     }
+    
+    include $baseDir . '/views/header.php';
 ?>
 
-<!DOCTYPE html>
 <main>
-    
     <h1>Register New Social Tweet Account</h1>
     <form method="POST" action="register.php">
         <label >
@@ -36,6 +39,9 @@
             <button type="button" formtarget="_blank">Login</button>
         </a >
     </form>
-    
 </main>
 
+<?php
+    $baseDir = __DIR__ . '/';
+    include $baseDir . '/views/footer.php';
+    ?>

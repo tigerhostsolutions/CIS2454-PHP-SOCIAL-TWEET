@@ -42,7 +42,7 @@
             $stmt->execute(['username' => $username, 'email' => $email, 'id' => $userId]);
         }
         
-        public static function getFollowingIds($userId) {
+        public static function getFollowing($userId) {
             $pdo = Database::getConnection();
             $stmt = $pdo->prepare("SELECT following_id FROM follows WHERE follower_id = :user_id");
             $stmt->execute(['user_id' => $userId]);

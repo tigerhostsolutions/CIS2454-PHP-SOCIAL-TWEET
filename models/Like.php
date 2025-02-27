@@ -1,5 +1,8 @@
 <?php
-class Like {
+    
+    use models\Database;
+    
+    class Like {
     public static function add($userId, $tweetId) {
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare("INSERT INTO likes (user_id, tweet_id) VALUES (:user_id, :tweet_id)");
