@@ -113,3 +113,68 @@ img {
 .profile-header p {
     margin: 5px 0;
 }
+
+/* New Styles for Tweets and User Layout */
+
+/* Layout for tweets and user info container */
+.tweets-layout {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    justify-content: space-between;
+    gap: 20px; /* Space between tweets and user info sections */
+}
+
+/* Tweets Section */
+.tweets {
+    flex: 2; /* Occupy 2 parts out of a total of 3 */
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* User Info Section */
+.users {
+    flex: 1; /* Occupy 1 part out of a total of 3 */
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.users ul li {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .tweets-layout {
+        display: block; /* Stack sections when screen width is small */
+    }
+
+    .tweets, .users {
+        width: 100%; /* Occupy full width */
+        margin-bottom: 20px; /* Add spacing between sections */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .tweets, .users {
+        padding: 10px;
+        font-size: 14px; /* Reduce font size for small screens */
+    }
+
+    .users ul li {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
