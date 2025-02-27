@@ -36,6 +36,30 @@
         <br><br>
         <button type="submit">Tweet</button>
     </form>
+
+    <h2>Users</h2>
+    <ul>
+        <?php
+        $users = User::getAllExcept($_SESSION['user_id']);
+        foreach ($users as $user) {
+            echo "<li>{$user['username']}";
+            if ($user['user_followed'] > 0) {
+                echo "<form method='POST' action='index.php' style='display:inline;'>
+                      <input type='hidden' name='unfollow_user_id' value='{$user['id']}'>
+                      <button type='submit'>Unfollow</button>
+                  </form>";
+            } else {
+                echo "<form method='POST' action='index.php' style='display:inline;'>
+                      <input type='hidden' name='follow_user_id' value='{$user['id']}'>
+                      <button type='submit'>Follow</button>
+                  </form>";
+            }
+            echo "<button onclick='showTweets({$user['id']})'>Show Tweets</button>";
+            echo "<ul id='tweets-{$user['id']}' style='display:none;'></ul>";
+            echo "</li>";
+        }
+        ?>
+    </ul>
 </main>
 <script>
   function showLikes(tweetId) {
@@ -48,6 +72,19 @@
         likesList.appendChild(li);
       });
       likesList.style.display = 'block';
+    });
+  }
+
+  function showTweets(userId) {
+    fetch(`index.php?tweets_user_id=${userId}`).then(response => response.json()).then(tweets => {
+      const tweetsList = document.getElementById(`tweets-${userId}`);
+      tweetsList.innerHTML = '';
+      tweets.forEach(tweet => {
+        const li = document.createElement('li');
+        li.textContent = `${tweet.content} - ${tweet.created_at}`;
+        tweetsList.appendChild(li);
+      });
+      tweetsList.style.display = 'block';
     });
   }
 </script>

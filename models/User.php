@@ -9,5 +9,17 @@ class User {
         $stmt->execute(['user_id' => $userId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function follow($followerId, $followingId) {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("INSERT INTO follows (follower_id, following_id) VALUES (:follower_id, :following_id)");
+        $stmt->execute(['follower_id' => $followerId, 'following_id' => $followingId]);
+    }
+
+    public static function unfollow($followerId, $followingId) {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("DELETE FROM follows WHERE follower_id = :follower_id AND following_id = :following_id");
+        $stmt->execute(['follower_id' => $followerId, 'following_id' => $followingId]);
+    }
 }
-?><?php
+?>
