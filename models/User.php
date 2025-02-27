@@ -42,12 +42,11 @@
             $stmt->execute(['username' => $username, 'email' => $email, 'id' => $userId]);
         }
         
-        public static function getFollowing($userId)
-        {
+        public static function getFollowingIds($userId) {
             $pdo = Database::getConnection();
-            $stmt = $pdo->prepare("SELECT users.* FROM follows JOIN users ON follows.following_id = users.id WHERE follows.follower_id = :user_id");
+            $stmt = $pdo->prepare("SELECT following_id FROM follows WHERE follower_id = :user_id");
             $stmt->execute(['user_id' => $userId]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_COLUMN);
         }
         
         public static function getFollowers($userId)
