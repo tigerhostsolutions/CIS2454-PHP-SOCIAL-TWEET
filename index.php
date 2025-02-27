@@ -2,30 +2,38 @@
     session_start();
     include 'includes/config/database.php';
     
+    global $pdo;
+    
     if (!isset($_SESSION['user_id'])) {
         header("Location: login.php");
+        exit;
     }
     
     $username = $_SESSION['username'] ?? 'Guest';
     
-   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['content'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['content'])) {
         $content = $_POST['content'];
-        $imagePath = null;
-    
+        $imagePath = NULL;
+        
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $imageTmpPath = $_FILES['image']['tmp_name'];
             $imageName = basename($_FILES['image']['name']);
             $imagePath = 'uploads/' . $imageName;
-    
+            
+            if (!is_writable('uploads')) {
+                die("Uploads directory is not writable.");
+            }
+            
             if (!move_uploaded_file($imageTmpPath, $imagePath)) {
-                die("Error uploading image.");
+                die("Error uploading image. Temp path: $imageTmpPath, Destination path: $imagePath");
             }
         }
-    
+        
         $stmt = $pdo->prepare("INSERT INTO tweets (user_id, content, image_path) VALUES (:user_id, :content, :image_path)");
         $stmt->execute(['user_id' => $_SESSION['user_id'], 'content' => $content, 'image_path' => $imagePath]);
-    
+        
         header("Location: index.php");
+        exit;
     }
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like_tweet_id'])) {
@@ -35,6 +43,7 @@
         $stmt->execute(['user_id' => $_SESSION['user_id'], 'tweet_id' => $tweet_id]);
         
         header("Location: index.php");
+        exit;
     }
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unlike_tweet_id'])) {
@@ -44,6 +53,7 @@
         $stmt->execute(['user_id' => $_SESSION['user_id'], 'tweet_id' => $tweet_id]);
         
         header("Location: index.php");
+        exit;
     }
     
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['tweet_id'])) {
@@ -86,39 +96,39 @@
             $stmt->execute(['user_id' => $_SESSION['user_id']]);
             $tweets = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
-      foreach ($tweets as $tweet) {
-          echo "<li>{$tweet['username']} - {$tweet['content']} - Likes: {$tweet['like_count']}";
-          if ($tweet['image_path']) {
-              echo "<br><img src='{$tweet['image_path']}' alt='Tweet image' style='max-width: 100%; height: auto;'>";
-          }
-          if ($tweet['user_liked'] > 0) {
-              echo "<form method='POST' action='index.php' style='display:inline;'>
+            foreach ($tweets as $tweet) {
+                echo "<li>{$tweet['username']} - {$tweet['content']} - Likes: {$tweet['like_count']}";
+                if ($tweet['image_path']) {
+                    echo "<br><img src='{$tweet['image_path']}' alt='Tweet image' style='max-width: 100%; height: auto;'>";
+                }
+                if ($tweet['user_liked'] > 0) {
+                    echo "<form method='POST' action='index.php' style='display:inline;'>
                           <input type='hidden' name='unlike_tweet_id' value='{$tweet['id']}'>
                           <button type='submit'>Unlike</button>
                       </form>";
-          } else {
-              echo "<form method='POST' action='index.php' style='display:inline;'>
+                } else {
+                    echo "<form method='POST' action='index.php' style='display:inline;'>
                           <input type='hidden' name='like_tweet_id' value='{$tweet['id']}'>
                           <button type='submit'>Like</button>
                       </form>";
-          }
-          echo "<button onclick='showLikes({$tweet['id']})'>Show Likes</button>";
-          echo "<ul id='likes-{$tweet['id']}' style='display:none;'></ul>";
-          echo "</li>";
-      }
+                }
+                echo "<button onclick='showLikes({$tweet['id']})'>Show Likes</button>";
+                echo "<ul id='likes-{$tweet['id']}' style='display:none;'></ul>";
+                echo "</li>";
+            }
         ?>
 
     </ul >
-<form method="POST" action="index.php" enctype="multipart/form-data">
-    <label>
-        <textarea name="content" placeholder="What's happening?" required></textarea>
-    </label>
-    <label>
-        <input type="file" name="image" accept="image/*">
-    </label>
-    <br><br>
-    <button type="submit">Tweet</button>
-</form>
+    <form method = "POST" action = "index.php" enctype = "multipart/form-data" >
+        <label >
+            <textarea name = "content" placeholder = "What's happening?" required ></textarea >
+        </label >
+        <label >
+            <input type = "file" name = "image" accept = "image/*" >
+        </label >
+        <br ><br >
+        <button type = "submit" >Tweet</button >
+    </form >
 
     <h2 >Users</h2 >
     <ul >
