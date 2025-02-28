@@ -1,8 +1,8 @@
 <?php
     global $pdo;
     session_start();
-    $baseDir = __DIR__ . '/';
     
+    $baseDir = __DIR__ . '/';
     include $baseDir . 'models/Database.php';
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
