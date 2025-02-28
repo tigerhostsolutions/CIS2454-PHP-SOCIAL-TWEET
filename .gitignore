@@ -1,4 +1,6 @@
     .env
+    .env-production
+    qodana.yaml
 
     #Composer
     /vendor/
