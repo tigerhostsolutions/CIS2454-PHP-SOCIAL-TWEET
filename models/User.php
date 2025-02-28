@@ -1,6 +1,6 @@
 <?php
     
-    class User
+    class  User
     {
         public static function getAllExcept($userId)
         {
@@ -43,10 +43,14 @@
         }
         
         public static function getFollowing($userId) {
-            $pdo = Database::getConnection();
-            $stmt = $pdo->prepare("SELECT following_id FROM follows WHERE follower_id = :user_id");
-            $stmt->execute(['user_id' => $userId]);
-            return $stmt->fetchAll(PDO::FETCH_COLUMN);
+            $db = Database::getConnection();
+            $query = "SELECT u.id, u.username, u.email, u.bio, u.profile_pic
+              FROM users u
+              INNER JOIN follows f ON f.following_id = u.id
+              WHERE f.follower_id = :userId";
+            $stmt = $db->prepare($query);
+            $stmt->execute(['userId' => $userId]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Ensures it returns an array of associative arrays
         }
         
         public static function getFollowers($userId)

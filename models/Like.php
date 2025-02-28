@@ -1,7 +1,5 @@
 <?php
     
-    use models\Database;
-    
     class Like {
     public static function add($userId, $tweetId) {
         $pdo = Database::getConnection();
