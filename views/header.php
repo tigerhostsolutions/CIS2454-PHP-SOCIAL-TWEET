@@ -7,12 +7,11 @@
 <body>
 <header>
     <nav>
-        <!-- Other navigation links -->
         <?php if (isset($_SESSION['username'])): ?>
             <div>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</div>
-            <br >
+            <br>
             <a href="/sites/cis2454-bad-twitter-php/index.php" target="_blank">Home</a>
-            <a href="/sites/cis2454-bad-twitter-php/views/profile.php" target="_blank">Profile</a>
+            <a href="/sites/cis2454-bad-twitter-php/views/profile.php?id=<?= htmlspecialchars($_SESSION['user_id']); ?>" target="_blank">Profile</a>
             <form method="POST" action="/sites/cis2454-bad-twitter-php/logout.php" target="_blank" style="display:inline;">
                 <button type="submit">Logout</button>
             </form>
