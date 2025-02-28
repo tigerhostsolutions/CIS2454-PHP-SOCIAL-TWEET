@@ -13,4 +13,4 @@
         $stmt->execute(['user_id' => $userId, 'tweet_id' => $tweetId]);
     }
 }
-?><?php
+?>
