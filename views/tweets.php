@@ -53,9 +53,6 @@
                                   <button type='submit'>Like</button>
                               </form>";
                             }
-                            echo "<button onclick='showLikes({$tweet['id']})'>Show Likes</button>";
-                            echo "<ul id='likes-{$tweet['id']}' style='display:none;'></ul>";
-                            echo "</li>";
                         }
                     ?>
                 </ul>
@@ -80,45 +77,11 @@
                           <input type='hidden' name='follow_user_id' value='{$user['id']}'>
                           <button type='submit'>Follow</button>
                       </form>";
-                        }
-                        echo "<button onclick='showTweets({$user['id']})'>Show Tweets</button>";
-                        echo "<ul id='tweets-{$user['id']}' style='display:none;'></ul>";
-                        echo "</li>";
+                        };
                     }
                 ?>
             </ul>
         </aside>
     </div>
 </main>
-<script>
-  // Scripts for likes and tweets
-  function showLikes(tweetId) {
-    fetch(`index.php?tweet_id=${tweetId}`)
-    .then(response => response.json())
-     .then(users => {
-      const likesList = document.getElementById(`likes-${tweetId}`);
-      likesList.innerHTML = '';
-      users.forEach(user => {
-        const li = document.createElement('li');
-        li.textContent = user.username;
-        likesList.appendChild(li);
-      });
-      likesList.style.display = 'block';
-    });
-  }
-
-  function showTweets(userId) {
-    fetch(`index.php?tweets_user_id=${userId}`)
-    .then(response => response.json())
-     .then(tweets => {
-      const tweetsList = document.getElementById(`tweets-${userId}`);
-      tweetsList.innerHTML = '';
-      tweets.forEach(tweet => {
-        const li = document.createElement('li');
-        li.textContent = tweet.content;
-        tweetsList.appendChild(li);
-      });
-      tweetsList.style.display = 'block';
-    });
-  }
-</script>
+<?php include $baseDir . 'views/footer.php'; // Include the footer file ?>
