@@ -14,50 +14,58 @@
 ?>
 <main>
     <div class="tweets-layout">
-        <!-- Tweets Section -->
-        <section class="tweets">
-            <h1>Welcome, <?php echo htmlspecialchars($username); ?>!</h1>
-            <ul>
-                <?php
-                    $tweets = Tweet::getAll($_SESSION['user_id']);
-                    foreach ($tweets as $tweet) {
-                        echo "<li>{$tweet['username']} - {$tweet['content']} - Likes: {$tweet['like_count']}";
-                        if ($tweet['image_path']) {
-                            echo "<br><img src='{$tweet['image_path']}' alt='Tweet image' style='max-width: 100%; height: auto;'>";
-                        }
-                        if ($tweet['user_liked'] > 0) {
-                            echo "<form method='POST' action='index.php' style='display:inline;'>
-                          <input type='hidden' name='unlike_tweet_id' value='{$tweet['id']}'>
-                          <button type='submit'>Unlike</button>
-                      </form>";
-                        } else {
-                            echo "<form method='POST' action='index.php' style='display:inline;'>
-                          <input type='hidden' name='like_tweet_id' value='{$tweet['id']}'>
-                          <button type='submit'>Like</button>
-                      </form>";
-                        }
-                        echo "<button onclick='showLikes({$tweet['id']})'>Show Likes</button>";
-                        echo "<ul id='likes-{$tweet['id']}' style='display:none;'></ul>";
-                        echo "</li>";
-                    }
-                ?>
-            </ul>
-            <form method="POST" action="index.php" enctype="multipart/form-data">
+        <!-- Form and Tweets Container -->
+        <div class="tweets-and-form">
+            <!-- Form Section -->
+            <form class="tweet-form" method="POST" action="index.php" enctype="multipart/form-data">
+                <h2>Compose a Tweet</h2>
                 <label>
                     <textarea name="content" placeholder="What's happening?" required></textarea>
                 </label>
                 <label>
                     <input type="file" name="image" accept="image/*">
                 </label>
-                <br><br>
                 <button type="submit">Tweet</button>
             </form>
-        </section>
+
+            <!-- Tweets Section -->
+            <section class="tweets">
+                <h1>Welcome, <?php echo htmlspecialchars($username); ?>!</h1>
+                <ul class="tweets-list">
+                    <?php
+                        $tweets = Tweet::getAll($_SESSION['user_id']);
+                        foreach ($tweets as $tweet) {
+                            echo "<li class='tweet-item'>
+                                    <strong>{$tweet['username']}</strong> - {$tweet['content']}
+                                    <br>
+                                    <small>Likes: {$tweet['like_count']}</small>";
+                            if ($tweet['image_path']) {
+                                echo "<br><img src='{$tweet['image_path']}' alt='Tweet image' class='tweet-image'>";
+                            }
+                            if ($tweet['user_liked'] > 0) {
+                                echo "<form method='POST' action='index.php' style='display:inline;'>
+                                  <input type='hidden' name='unlike_tweet_id' value='{$tweet['id']}'>
+                                  <button type='submit'>Unlike</button>
+                              </form>";
+                            } else {
+                                echo "<form method='POST' action='index.php' style='display:inline;'>
+                                  <input type='hidden' name='like_tweet_id' value='{$tweet['id']}'>
+                                  <button type='submit'>Like</button>
+                              </form>";
+                            }
+                            echo "<button onclick='showLikes({$tweet['id']})'>Show Likes</button>";
+                            echo "<ul id='likes-{$tweet['id']}' style='display:none;'></ul>";
+                            echo "</li>";
+                        }
+                    ?>
+                </ul>
+            </section>
+        </div>
 
         <!-- User Info Section -->
         <aside class="users">
             <h2>Users</h2>
-            <ul>
+            <ul class="users-list">
                 <?php
                     $users = User::getAllExcept($_SESSION['user_id']);
                     foreach ($users as $user) {
