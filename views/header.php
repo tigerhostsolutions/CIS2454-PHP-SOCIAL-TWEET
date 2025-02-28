@@ -9,8 +9,9 @@
     <nav>
         <!-- Other navigation links -->
         <?php if (isset($_SESSION['username'])): ?>
-            <span>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span>
-            <a href="/sites/cis2454-bad-twitter-php/views/home.php" target="_blank">Home</a>
+            <div>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</div>
+            <br >
+            <a href="/sites/cis2454-bad-twitter-php/index.php" target="_blank">Home</a>
             <a href="/sites/cis2454-bad-twitter-php/views/profile.php" target="_blank">Profile</a>
             <form method="POST" action="/sites/cis2454-bad-twitter-php/logout.php" target="_blank" style="display:inline;">
                 <button type="submit">Logout</button>
