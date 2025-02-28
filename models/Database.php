@@ -16,7 +16,7 @@
                 $host = $_ENV['DB_HOST'] ?? 'localhost';
                 $db = $_ENV['DB_NAME'] ?? 'twitter_clone';
                 $user = $_ENV['DB_USER'] ?? 'root';
-                $password = $_ENV['DB_PASSWORD'] ?? '';
+                $password = $_ENV['DB_PASSWORD'] ?? 'root';
                 
                 try {
                     self::$pdo = new PDO("mysql:host=$host;dbname=$db", $user, $password);
