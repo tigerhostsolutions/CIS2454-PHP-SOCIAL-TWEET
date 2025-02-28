@@ -33,11 +33,7 @@
         <label >
             <input type="password" name="password" placeholder="Password" required>
         </label >
-        <br > <br >
         <button type="submit" formtarget="_blank">Register</button>
-        <a href = "login.php" >
-            <button type="button" formtarget="_blank">Login</button>
-        </a >
     </form>
 </main>
 
