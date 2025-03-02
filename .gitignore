@@ -1,6 +1,5 @@
     .env
     .env-production
-    test_upload.php
     qodana.yaml
    .github/workflows/qodana_code_quality.yml
 
