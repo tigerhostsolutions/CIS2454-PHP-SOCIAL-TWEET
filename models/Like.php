@@ -1,5 +1,5 @@
 <?php
-    
+    // Like.php
     class Like {
     public static function add($userId, $tweetId) {
         $pdo = Database::getConnection();
@@ -13,4 +13,3 @@
         $stmt->execute(['user_id' => $userId, 'tweet_id' => $tweetId]);
     }
 }
-?>

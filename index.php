@@ -1,6 +1,6 @@
 <?php
-include 'models/Database.php';
-include 'controllers/TweetController.php';
-
-TweetController::handleRequest();
-?>
+    // index.php
+    include 'models/Database.php';
+    include 'controllers/TweetController.php';
+    
+    TweetController::handleRequest();

@@ -1,4 +1,5 @@
 <?php
+    // tweets.php
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
@@ -7,81 +8,85 @@
         exit;
     }
     
-    $baseDir = __DIR__ . '/../'; // Base directory of the project
-    include_once $baseDir . 'models/Tweet.php'; // Include the Tweet class
+    $baseDir = __DIR__ . '/../';                   // Base directory of the project
+    include_once $baseDir . 'models/Tweet.php';    // Include the Tweet class
     include_once $baseDir . 'models/Database.php'; // Include the Database class if required
-    include $baseDir . 'views/header.php'; // Include the header file
+    include $baseDir . 'views/header.php';         // Include the header file
 ?>
-<main>
-    <div class="tweets-layout">
-        <!-- Form and Tweets Container -->
-        <div class="tweets-and-form">
-            <!-- Form Section -->
-            <form class="tweet-form" method="POST" action="index.php" enctype="multipart/form-data">
-                <h2>Compose a Tweet</h2>
-                <label>
-                    <textarea name="content" placeholder="What's happening?" required></textarea>
-                </label>
-                <label>
-                    <input type="file" name="image" accept="image/*">
-                </label>
-                <button type="submit">Tweet</button>
-            </form>
 
-            <!-- Tweets Section -->
-            <section class="tweets">
-                <h1>Welcome, <?php echo htmlspecialchars($username); ?>!</h1>
-                <ul class="tweets-list">
-                    <?php
-                        $tweets = Tweet::getAll($_SESSION['user_id']);
-                        foreach ($tweets as $tweet) {
-                            echo "<li class='tweet-item'>
+    <main >
+        <div class = "tweets-layout" >
+            <!-- Form and Tweets Container -->
+            <div class = "tweets-and-form" >
+                <!-- Form Section -->
+                <form class = "tweet-form" method = "POST" action = "index.php" enctype = "multipart/form-data" >
+                    <h2 >Compose a Tweet</h2 >
+                    <label >
+                        <textarea name = "content" placeholder = "What's happening?" required ></textarea >
+                    </label >
+                    <label >
+                        <input type = "file" name = "image" accept = "image/*" >
+                    </label >
+                    <button type = "submit" >Tweet</button >
+                </form >
+
+                <!-- Tweets Section -->
+                <section class = "tweets" >
+                    <h1 >Welcome, <?php
+                            echo htmlspecialchars($username); ?>!</h1 >
+                    <ul class = "tweets-list" >
+                        <?php
+                            $tweets = Tweet::getAll($_SESSION['user_id']);
+                            foreach ($tweets as $tweet) {
+                                echo "<li class='tweet-item'>
                                     <strong>{$tweet['username']}</strong> - {$tweet['content']}
                                     <br>
                                     <small>Likes: {$tweet['like_count']}</small>";
-                            if ($tweet['image_path']) {
-                                echo "<br><img src='{$tweet['image_path']}' alt='Tweet image' class='tweet-image'>";
-                            }
-                            if ($tweet['user_liked'] > 0) {
-                                echo "<form method='POST' action='index.php' style='display:inline;'>
+                                if ($tweet['image_path']) {
+                                    echo "<br><img src='{$tweet['image_path']}' alt='Tweet image' class='tweet-image'>";
+                                }
+                                if ($tweet['user_liked'] > 0) {
+                                    echo "<form method='POST' action='index.php' style='display:inline;'>
                                   <input type='hidden' name='unlike_tweet_id' value='{$tweet['id']}'>
                                   <button type='submit'>Unlike</button>
                               </form>";
-                            } else {
-                                echo "<form method='POST' action='index.php' style='display:inline;'>
+                                } else {
+                                    echo "<form method='POST' action='index.php' style='display:inline;'>
                                   <input type='hidden' name='like_tweet_id' value='{$tweet['id']}'>
                                   <button type='submit'>Like</button>
                               </form>";
+                                }
                             }
-                        }
-                    ?>
-                </ul>
-            </section>
-        </div>
+                        ?>
+                    </ul >
+                </section >
+            </div >
 
-        <!-- User Info Section -->
-        <aside class="users">
-            <h2>Users</h2>
-            <ul class="users-list">
-                <?php
-                    $users = User::getAllExcept($_SESSION['user_id']);
-                    foreach ($users as $user) {
-                        echo "<li>{$user['username']}";
-                        if ($user['user_followed'] > 0) {
-                            echo "<form method='POST' action='index.php' style='display:inline;'>
+            <!-- User Info Section -->
+            <aside class = "users" >
+                <h2 >Users</h2 >
+                <ul class = "users-list" >
+                    <?php
+                        $users = User::getAllExcept($_SESSION['user_id']);
+                        foreach ($users as $user) {
+                            echo "<li>{$user['username']}";
+                            if ($user['user_followed'] > 0) {
+                                echo "<form method='POST' action='index.php' style='display:inline;'>
                           <input type='hidden' name='unfollow_user_id' value='{$user['id']}'>
                           <button type='submit'>Unfollow</button>
                       </form>";
-                        } else {
-                            echo "<form method='POST' action='index.php' style='display:inline;'>
+                            } else {
+                                echo "<form method='POST' action='index.php' style='display:inline;'>
                           <input type='hidden' name='follow_user_id' value='{$user['id']}'>
                           <button type='submit'>Follow</button>
                       </form>";
-                        };
-                    }
-                ?>
-            </ul>
-        </aside>
-    </div>
-</main>
-<?php include $baseDir . 'views/footer.php'; // Include the footer file ?>
+                            }
+                        }
+                    ?>
+                </ul >
+            </aside >
+        </div >
+    </main >
+
+<?php
+    include $baseDir . 'views/footer.php'; ?>

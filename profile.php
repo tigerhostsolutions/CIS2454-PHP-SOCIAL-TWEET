@@ -1,6 +1,6 @@
 <?php
-include 'models/Database.php';
-include 'controllers/UserController.php';
-
-UserController::handleRequest();
-?>
+    // profile.php
+    include 'models/Database.php';
+    include 'controllers/UserController.php';
+    
+    UserController::handleRequest();

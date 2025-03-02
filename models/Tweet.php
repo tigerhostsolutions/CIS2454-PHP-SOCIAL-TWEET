@@ -1,5 +1,5 @@
 <?php
-    
+    // Tweet.php
     $baseDir = __DIR__ . '/';
     include_once $baseDir . '/Database.php';
     include_once $baseDir . '/Like.php';
@@ -89,5 +89,3 @@
             $stmt->execute(['tweet_id' => $tweetId]);
         }
     }
-
-?><?php

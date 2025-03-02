@@ -1,6 +1,5 @@
 <?php
 // login.php
-    
     session_start();
     $baseDir = __DIR__ . '/';
     include $baseDir . 'models/Database.php';
@@ -25,7 +24,7 @@
     }
     
     include $baseDir . '/views/header.php';
-    ?>
+?>
 
     <main >
         <h1 >Login Social Tweet</h1 >
@@ -43,4 +42,4 @@
 <?php
     $baseDir = __DIR__ . '/';
     include $baseDir . '/views/footer.php';
-    ?>
+?>

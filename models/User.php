@@ -1,5 +1,5 @@
 <?php
-    
+    // User.php
     class  User
     {
         public static function getAllExcept($userId)
@@ -61,4 +61,3 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
-?>

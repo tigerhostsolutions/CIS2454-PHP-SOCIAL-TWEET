@@ -1,4 +1,5 @@
 <?php
+    // Database.php
     require_once __DIR__ . '/../vendor/autoload.php'; // Autoload for phpdotenv
     
     use Dotenv\Dotenv;
@@ -26,13 +27,13 @@
                 $dsn = "mysql:host={$host};dbname={$db}";
                 
                 // RDS connection
-//                $dbhost = $_SERVER['RDS_HOSTNAME'];
-//                $dbport = $_SERVER['RDS_PORT'];
-//                $dbname = $_SERVER['RDS_DB_NAME'];
+//                $dbhost = $_SERVER['RDS_HOSTNAME'] ?? 'awseb-e-7y9hai72sh-stack-awsebrdsdatabase-q8jzlxxm6uxj.cx0w4awbhwbr.us-east-1.rds.amazonaws.com';
+//                $dbport = $_SERVER['RDS_PORT'] ?? 3306;
+//                $dbname = $_SERVER['RDS_DB_NAME'] ?? 'ebdb';
 //                $charset = 'utf8';
 //                $dsn = "mysql:host={$dbhost};port={$dbport};dbname={$dbname};charset={$charset}";
-//                $username = $_SERVER['RDS_USERNAME'];
-//                $password = $_SERVER['RDS_PASSWORD'];
+//                $username = $_SERVER['RDS_USERNAME'] ?? 'badtwitter';
+//                $password = $_SERVER['RDS_PASSWORD'] ?? 'badtwitter';
                 
                 try {
                     self::$pdo = new PDO($dsn, $username, $password);
