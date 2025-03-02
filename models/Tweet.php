@@ -16,8 +16,7 @@
         public static function getAll($userId)
         {
             $pdo = Database::getConnection();
-            $stmt = $pdo->prepare("SELECT tweets.*, users.username,
-                                 (SELECT COUNT(*) FROM likes WHERE likes.tweet_id = tweets.id) AS like_count,
+            $stmt = $pdo->prepare("SELECT tweets.*, users.username, tweets.likes_count AS like_count,
                                  (SELECT COUNT(*) FROM likes WHERE likes.tweet_id = tweets.id AND likes.user_id = :user_id) AS user_liked
                                  FROM tweets
                                  JOIN users ON tweets.user_id = users.id
@@ -68,12 +67,26 @@
         
         public static function likeTweet($userId, $tweetId)
         {
+            $pdo = Database::getConnection();
+            
+            // Add the like to the "likes" table
             Like::add($userId, $tweetId);
+            
+            // Increment the like count in the "tweets" table
+            $stmt = $pdo->prepare("UPDATE tweets SET likes_count = likes_count + 1 WHERE id = :tweet_id");
+            $stmt->execute(['tweet_id' => $tweetId]);
         }
         
         public static function unlikeTweet($userId, $tweetId)
         {
+            $pdo = Database::getConnection();
+            
+            // Remove the like from the "likes" table
             Like::remove($userId, $tweetId);
+            
+            // Decrement the like count in the "tweets" table
+            $stmt = $pdo->prepare("UPDATE tweets SET likes_count = likes_count - 1 WHERE id = :tweet_id");
+            $stmt->execute(['tweet_id' => $tweetId]);
         }
     }
 
