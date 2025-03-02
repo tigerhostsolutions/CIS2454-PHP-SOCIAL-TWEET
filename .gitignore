@@ -4,8 +4,7 @@
     qodana.yaml
 
     #Composer
-    /vendor/
-    composer.lock
+    /vendor
 
     # PHPStorm
     .idea/
