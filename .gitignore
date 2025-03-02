@@ -30,7 +30,6 @@
 
     # Symfony related (if applicable)
     /var/
-    /vendor/
     /.env.local
     .env.local.php
     .env.*.local
