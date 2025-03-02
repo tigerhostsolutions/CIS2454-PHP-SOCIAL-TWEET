@@ -1,5 +1,6 @@
     .env
     .env-production
+    test_upload.php
     qodana.yaml
 
     #Composer
@@ -9,6 +10,7 @@
     # PHPStorm
     .idea/
     *.iml
+    .idea/dataSources.xml
 
     # Node
     /node_modules/
