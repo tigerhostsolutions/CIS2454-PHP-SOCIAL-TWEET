@@ -10,9 +10,10 @@
         <?php if (isset($_SESSION['username'])): ?>
             <div>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</div>
             <br>
-            <a href="/sites/cis2454-bad-twitter-php/index.php" target="_blank">Home</a>
-            <a href="/sites/cis2454-bad-twitter-php/views/profile.php?id=<?= htmlspecialchars($_SESSION['user_id']); ?>" target="_blank">Profile</a>
-            <form method="POST" action="/sites/cis2454-bad-twitter-php/logout.php" target="_blank" style="display:inline;">
+            <a href="/sites/cis2454-bad-twitter-php/index.php" target="_self">Home</a>
+            <a href="/sites/cis2454-bad-twitter-php/views/profile.php?id=<?= htmlspecialchars($_SESSION['user_id']);
+            ?>" target="_self">Profile</a>
+            <form method="POST" action="/sites/cis2454-bad-twitter-php/logout.php" target="_self" style="display:inline;">
                 <button type="submit">Logout</button>
             </form>
         <?php else: ?>

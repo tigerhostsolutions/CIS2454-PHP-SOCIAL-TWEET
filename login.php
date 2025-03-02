@@ -36,7 +36,7 @@
             <label >
                 <input type = "password" name = "password" placeholder = "Password" required >
             </label >
-            <button type = "submit" formtarget = "_blank" >Login</button >
+            <button type = "submit" formtarget = "_self" >Login</button >
         </form >
     </main >
 
