@@ -22,18 +22,22 @@
                 // Retrieve values from the .env file
                 $host = $_ENV['DB_HOST'] ?? 'localhost';
                 $db = $_ENV['DB_NAME'] ?? 'twitter_clone';
-                $username = $_ENV['DB_USER'] ?? 'badtwitter';
-                $password = $_ENV['DB_PASSWORD'] ?? 'badtwitter';
                 $dsn = "mysql:host={$host};dbname={$db}";
                 
+                // Localhost username & password credentials
+                $username = $_ENV['DB_USER'] ?? 'badtwitter';
+                $password = $_ENV['DB_PASSWORD'] ?? 'badtwitter';
+                
                 // RDS connection
-//                $dbhost = $_SERVER['RDS_HOSTNAME'] ?? 'awseb-e-7y9hai72sh-stack-awsebrdsdatabase-q8jzlxxm6uxj.cx0w4awbhwbr.us-east-1.rds.amazonaws.com';
-//                $dbport = $_SERVER['RDS_PORT'] ?? 3306;
-//                $dbname = $_SERVER['RDS_DB_NAME'] ?? 'ebdb';
-//                $charset = 'utf8';
+//                $dbhost = $_ENV['RDS_HOSTNAME'] ?? getenv('RDS_HOSTNAME') ?? 'badtwitterclone.c36iwsaw0x1s.us-east-1.rds.amazonaws.com';
+//                $dbport = $_ENV['RDS_PORT'] ?? getenv('RDS_PORT') ?? 3306;
+//                $dbname = $_ENV['RDS_DB_NAME'] ?? getenv('RDS_DB_NAME') ?? 'socialtweet';
+//                $charset = 'utf8mb4';
 //                $dsn = "mysql:host={$dbhost};port={$dbport};dbname={$dbname};charset={$charset}";
-//                $username = $_SERVER['RDS_USERNAME'] ?? 'badtwitter';
-//                $password = $_SERVER['RDS_PASSWORD'] ?? 'badtwitter';
+                
+                // RDS username & password credentials
+//                $username = $_ENV['RDS_USERNAME'] ?? getenv('RDS_USERNAME') ?? 'badtwitter';
+//                $password = $_ENV['RDS_PASSWORD'] ?? getenv('RDS_PASSWORD') ?? 'badtwitter';
                 
                 try {
                     self::$pdo = new PDO($dsn, $username, $password);
