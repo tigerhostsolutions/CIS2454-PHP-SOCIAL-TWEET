@@ -1,8 +1,6 @@
 <?php
-// login.php
+    // login.php
     session_start();
-//    $baseDir = __DIR__ . '/';
-//    include $baseDir . 'models/Database.php';
     
     require_once __DIR__ . '/config.php';
     require_once BASE_DIR . '/models/Database.php';
@@ -26,27 +24,20 @@
             echo "Invalid credentials.";
         }
     }
-    
-//    include $baseDir . '/views/header.php';
 ?>
 
-    <main >
-        <h1 >Login Social Tweet</h1 >
-        <form method = "POST" action = "login.php" >
-            <label >
-                <input type = "email" name = "email" placeholder = "Email" required >
-            </label >
-            <label >
-                <input type = "password" name = "password" placeholder = "Password" required >
-            </label >
-            <button type = "submit" formtarget = "_self" >Login</button >
-        </form >
-    </main >
-
-<?php
-//    $baseDir = __DIR__ . '/';
-//    include $baseDir . '/views/footer.php';
-//?>
+<main >
+    <h1 >Login Social Tweet</h1 >
+    <form method = "POST" action = "login.php" >
+        <label >
+            <input type = "email" name = "email" placeholder = "Email" required >
+        </label >
+        <label >
+            <input type = "password" name = "password" placeholder = "Password" required >
+        </label >
+        <button type = "submit" formtarget = "_self" >Login</button >
+    </form >
+</main >
 
 <?php
     require_once BASE_DIR . '/views/footer.php';

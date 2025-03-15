@@ -8,11 +8,6 @@
         exit;
     }
     
-//    $baseDir = __DIR__ . '/../';                   // Base directory of the project
-//    include_once $baseDir . 'models/Tweet.php';    // Include the Tweet class
-//    include_once $baseDir . 'models/Database.php'; // Include the Database class if required
-//    include $baseDir . 'views/header.php';         // Include the header file
-    
     require_once __DIR__ . '/../config.php';
     require_once BASE_DIR . '/views/header.php';
     require_once BASE_DIR . '/models/Tweet.php';
@@ -25,7 +20,8 @@
             <!-- Form and Tweets Container -->
             <div class = "tweets-and-form" >
                 <!-- Form Section -->
-                <form class = "tweet-form" method = "POST" action = "index.php" enctype = "multipart/form-data" >
+                <form class = "tweet-form" method = "POST" action = "<?= BASE_URL ?>index.php" enctype =
+                "multipart/form-data" >
                     <h2 >Compose a Tweet</h2 >
                     <label >
                         <textarea name = "content" placeholder = "What's happening?" required ></textarea >
@@ -93,9 +89,6 @@
             </aside >
         </div >
     </main >
-
-<?php
-//    include $baseDir . 'views/footer.php'; ?>
 
 <?php
     require_once BASE_DIR . '/views/footer.php';

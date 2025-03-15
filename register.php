@@ -3,9 +3,6 @@
     global $pdo;
     session_start();
     
-//    $baseDir = __DIR__ . '/';
-//    include $baseDir . 'models/Database.php';
-    
     require_once __DIR__ . '/config.php';
     require_once BASE_DIR . '/models/Database.php';
     require_once BASE_DIR . '/views/header.php';
@@ -23,8 +20,6 @@
         $_SESSION['user_id'] = $pdo->lastInsertId();
         header("Location: index.php");
     }
-    
-//    include $baseDir . '/views/header.php';
 ?>
 
 <main>
@@ -42,12 +37,6 @@
         <button type="submit" formtarget="_blank">Register</button>
     </form>
 </main>
-
-<?php
-//    $baseDir = __DIR__ . '/';
-//    include $baseDir . '/views/footer.php';
-//    ?>
-
 
 <?php
     require_once BASE_DIR . '/views/footer.php';

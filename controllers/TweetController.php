@@ -1,10 +1,6 @@
 <?php
     // TweetController.php
     
-//    include_once 'models/Tweet.php';
-//    include_once 'models/Like.php';
-//    include_once 'models/User.php';
-    
     require_once __DIR__ . '/../config.php';
     require_once BASE_DIR . '/models/Tweet.php';
     require_once BASE_DIR . '/models/Like.php';
@@ -42,7 +38,7 @@
                 }
             }
             
-            include 'views/tweets.php';
+            require_once BASE_DIR . '/views/tweets.php';
         }
         
         private static function createTweet() {
