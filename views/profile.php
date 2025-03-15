@@ -14,7 +14,6 @@
     require_once BASE_DIR . '/models/Tweet.php';
     require_once BASE_DIR . '/models/User.php';
     
-    
     $loggedInUserId = $_SESSION['user_id']; // Get the logged-in user's ID
     $profileUser = User::getById($loggedInUserId); // Fetch user data
     $tweets = Tweet::getByUserId($loggedInUserId); // Fetch user's tweets
