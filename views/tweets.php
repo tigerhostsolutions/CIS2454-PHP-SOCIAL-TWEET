@@ -8,10 +8,16 @@
         exit;
     }
     
-    $baseDir = __DIR__ . '/../';                   // Base directory of the project
-    include_once $baseDir . 'models/Tweet.php';    // Include the Tweet class
-    include_once $baseDir . 'models/Database.php'; // Include the Database class if required
-    include $baseDir . 'views/header.php';         // Include the header file
+//    $baseDir = __DIR__ . '/../';                   // Base directory of the project
+//    include_once $baseDir . 'models/Tweet.php';    // Include the Tweet class
+//    include_once $baseDir . 'models/Database.php'; // Include the Database class if required
+//    include $baseDir . 'views/header.php';         // Include the header file
+    
+    require_once __DIR__ . '/../config.php';
+    require_once BASE_DIR . '/views/header.php';
+    require_once BASE_DIR . '/models/Tweet.php';
+    require_once BASE_DIR . '/models/Database.php';
+    
 ?>
 
     <main >
@@ -89,4 +95,8 @@
     </main >
 
 <?php
-    include $baseDir . 'views/footer.php'; ?>
+//    include $baseDir . 'views/footer.php'; ?>
+
+<?php
+    require_once BASE_DIR . '/views/footer.php';
+?>

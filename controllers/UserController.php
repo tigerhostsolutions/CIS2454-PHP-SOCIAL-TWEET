@@ -1,7 +1,11 @@
 <?php
     // UserController.php
-    include_once 'models/User.php';
-    include_once 'models/Tweet.php';
+//    include_once 'models/User.php';
+//    include_once 'models/Tweet.php';
+    
+    require_once __DIR__ . '/../config.php';
+    require_once BASE_DIR . '/models/Tweet.php';
+    require_once BASE_DIR . '/models/User.php';
     
     class UserController
     {

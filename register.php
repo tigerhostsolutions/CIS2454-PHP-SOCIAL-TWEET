@@ -3,8 +3,13 @@
     global $pdo;
     session_start();
     
-    $baseDir = __DIR__ . '/';
-    include $baseDir . 'models/Database.php';
+//    $baseDir = __DIR__ . '/';
+//    include $baseDir . 'models/Database.php';
+    
+    require_once __DIR__ . '/config.php';
+    require_once BASE_DIR . '/models/Database.php';
+    require_once BASE_DIR . '/views/header.php';
+    
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = $_POST['username'];
@@ -19,7 +24,7 @@
         header("Location: index.php");
     }
     
-    include $baseDir . '/views/header.php';
+//    include $baseDir . '/views/header.php';
 ?>
 
 <main>
@@ -39,6 +44,11 @@
 </main>
 
 <?php
-    $baseDir = __DIR__ . '/';
-    include $baseDir . '/views/footer.php';
-    ?>
+//    $baseDir = __DIR__ . '/';
+//    include $baseDir . '/views/footer.php';
+//    ?>
+
+
+<?php
+    require_once BASE_DIR . '/views/footer.php';
+?>

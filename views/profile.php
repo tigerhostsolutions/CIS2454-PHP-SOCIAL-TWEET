@@ -9,10 +9,16 @@
         exit;
     }
     
-    $baseDir = __DIR__ . '/'; // Base directory of the project
-    include_once $baseDir . '../models/Tweet.php'; // Include Tweet class
-    include_once $baseDir . '../models/User.php'; // Include User class
-    include $baseDir . '../views/header.php'; // Include header file
+//    $baseDir = __DIR__ . '/'; // Base directory of the project
+//    include_once $baseDir . '../models/Tweet.php'; // Include Tweet class
+//    include_once $baseDir . '../models/User.php'; // Include User class
+//    include $baseDir . '../views/header.php'; // Include header file
+    
+    require_once __DIR__ . '/../config.php';
+    require_once BASE_DIR . '/views/header.php';
+    require_once BASE_DIR . '/models/Tweet.php';
+    require_once BASE_DIR . '/models/User.php';
+    
     
     $loggedInUserId = $_SESSION['user_id']; // Get the logged-in user's ID
     $profileUser = User::getById($loggedInUserId); // Fetch user data
@@ -124,3 +130,7 @@
         </aside>
     </div>
 </main>
+
+<?php
+    require_once BASE_DIR . '/views/footer.php';
+?>
