@@ -5,7 +5,7 @@
 <html lang = "en" >
 <head >
     <title >Twitter Clone</title >
-    <link rel = "stylesheet" type = "text/css" href = "/sites/cis2454-bad-twitter-php/includes/css/styles.css" >
+    <link rel = "stylesheet" type = "text/css" href = "/sites/cis2454-bad-twitter-php/css/styles.css" >
 </head >
 <body >
 <header >
