@@ -1,5 +1,6 @@
     .env
     .env-production
+    database_config.env
     qodana.yaml
    .github/workflows/qodana_code_quality.yml
 
