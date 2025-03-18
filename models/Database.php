@@ -29,7 +29,8 @@
                 $password = $_ENV['DB_PASSWORD'] ?? 'badtwitter';
                 
                 // RDS connection
-//                $dbhost = $_ENV['RDS_HOSTNAME'] ?? getenv('RDS_HOSTNAME') ?? 'badtwitterclone.c36iwsaw0x1s.us-east-1.rds.amazonaws.com';
+//                $dbhost = $_ENV['RDS_HOSTNAME'] ?? getenv('RDS_HOSTNAME') ?? 'cis2454-php-jsp.c36iwsaw0x1s.us-east-1
+//.rds.amazonaws.com';
 //                $dbport = $_ENV['RDS_PORT'] ?? getenv('RDS_PORT') ?? 3306;
 //                $dbname = $_ENV['RDS_DB_NAME'] ?? getenv('RDS_DB_NAME') ?? 'socialtweet';
 //                $charset = 'utf8mb4';
