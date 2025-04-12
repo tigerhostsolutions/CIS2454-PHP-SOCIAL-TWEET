@@ -7,7 +7,6 @@
     require_once BASE_DIR . '/models/Database.php';
     require_once BASE_DIR . '/views/header.php';
     
-    
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = $_POST['username'];
         $email = $_POST['email'];

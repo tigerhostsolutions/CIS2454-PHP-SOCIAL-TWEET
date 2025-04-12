@@ -3,8 +3,9 @@
     if (php_sapi_name() === 'cli') {
         // CLI Mode: Dynamically calculate
         $protocol = 'http://';
-        $host = 'localhost';                                                                    // Default fallback
-        $projectRoot = str_replace('\\', '/', realpath(dirname(__FILE__) . '/PHPBadTwitter/')); // Normalize directory
+        $host = 'localhost';
+        $projectRoot = str_replace('\\', '/',
+                        realpath(dirname(__FILE__) . '/PHPBadTwitter/'));
         $rootPath = str_replace($_SERVER['DOCUMENT_ROOT'], '', $projectRoot);
         define('BASE_URL', $protocol . $host . $rootPath . '/');
     } else {
@@ -14,8 +15,7 @@
         
         // Use the script's directory name to avoid file-specific paths
         $scriptDir = dirname($_SERVER['SCRIPT_NAME']);
-        $projectRoot = rtrim(str_replace('/views', '', $scriptDir)) . '/'; // Adjust if needed
-        
+        $projectRoot = rtrim(str_replace('/views', '', $scriptDir)) . '/';
         define('BASE_URL', $protocol . $host . $projectRoot);
     }
 // Directory Paths

@@ -12,7 +12,6 @@
     require_once BASE_DIR . '/views/header.php';
     require_once BASE_DIR . '/models/Tweet.php';
     require_once BASE_DIR . '/models/Database.php';
-    
 ?>
 
     <main >
