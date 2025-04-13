@@ -35,16 +35,16 @@
                 $password = $_ENV['DB_LOCAL_PASS'];
                 
                 // RDS connection
-//                $dbhost = $_ENV['RDS_HOSTNAME'] ?? getenv('RDS_HOSTNAME') ?? 'cis2454-php-jsp.c36iwsaw0x1s.us-east-1
-//.rds.amazonaws.com';
-//                $dbport = $_ENV['RDS_PORT'] ?? getenv('RDS_PORT') ?? 3306;
-//                $dbname = $_ENV['RDS_DB_NAME'] ?? getenv('RDS_DB_NAME') ?? 'socialtweet';
+//                $dbhost = $_ENV['DB_REMOTE_HOST'] ?? getenv('DB_REMOTE_HOST') ?? 'cis2454-php-jsp.c36iwsaw0x1s
+//.us-east-1.rds.amazonaws.com';
+//                $dbport = $_ENV['DB_REMOTE_PORT'] ?? getenv('DB_REMOTE_PORT') ?? 3306;
+//                $dbname = $_ENV['DB_REMOTE_NAME'] ?? getenv('DB_REMOTE_NAME') ?? 'socialtweet';
 //                $charset = 'utf8mb4';
 //                $dsn = "mysql:host={$dbhost};port={$dbport};dbname={$dbname};charset={$charset}";
                 
                 // RDS username & password credentials
-//                $username = $_ENV['RDS_USERNAME'] ?? getenv('RDS_USERNAME') ?? 'badtwitter';
-//                $password = $_ENV['RDS_PASSWORD'] ?? getenv('RDS_PASSWORD') ?? 'badtwitter';
+//                $username = $_ENV['DB_REMOTE_USER'] ?? getenv('DB_REMOTE_USER') ?? 'badtwitter';
+//                $password = $_ENV['DB_REMOTE_PASS'] ?? getenv('DB_REMOTE_PASS') ?? 'badtwitter';
                 
                 try {
                     self::$pdo = new PDO($dsn, $username, $password);
