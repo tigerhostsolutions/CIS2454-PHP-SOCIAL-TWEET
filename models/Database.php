@@ -11,22 +11,28 @@
         public static function getConnection()
         {
             if (self::$pdo === NULL) {
-                // Determine which environment file to load
+//                /* Determine which environment file to load */
                 $env = getenv('APP_ENV') ?: 'development'; // Defaults to 'development' if APP_ENV is not set
                 $envFile = $env === 'production' ? '.env-production' : '.env';
-                
-                // Load the appropriate .env file
+//
+//                /* Load the appropriate .env file */
                 $dotenv = Dotenv::createImmutable(__DIR__ . '/../', $envFile);
                 $dotenv->load();
                 
                 // Retrieve values from the .env file
-                $host = $_ENV['DB_HOST'] ?? 'localhost';
-                $db = $_ENV['DB_NAME'] ?? 'twitter_clone';
-                $dsn = "mysql:host={$host};dbname={$db}";
+//                $dbhost = $_ENV['DB_LOCAL_HOST'] ?? 'localhost';
+//                $dbname = $_ENV['DB_LOCAL_NAME'] ?? 'twitter_clone';
+//                $dbport = $_ENV['DB_LOCAL_PORT'] ?? '3306';
+                $dbhost = $_ENV['DB_LOCAL_HOST'] ;
+                $dbname = $_ENV['DB_LOCAL_NAME'] ;
+                $dbport = $_ENV['DB_LOCAL_PORT'] ;
+                $dsn = "mysql:host={$dbhost};port={$dbport};dbname={$dbname}";
                 
                 // Localhost username & password credentials
-                $username = $_ENV['DB_USER'] ?? 'badtwitter';
-                $password = $_ENV['DB_PASSWORD'] ?? 'badtwitter';
+//                $username = $_ENV['DB_LOCAL_USER'] ?? 'badtwitter';
+//                $password = $_ENV['DB_LOCAL_PASS'] ?? 'badtwitter';
+                $username = $_ENV['DB_LOCAL_USER'] ;
+                $password = $_ENV['DB_LOCAL_PASS'];
                 
                 // RDS connection
 //                $dbhost = $_ENV['RDS_HOSTNAME'] ?? getenv('RDS_HOSTNAME') ?? 'cis2454-php-jsp.c36iwsaw0x1s.us-east-1
@@ -44,7 +50,8 @@
                     self::$pdo = new PDO($dsn, $username, $password);
                     self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 } catch (PDOException $e) {
-                    die("ERROR: Could not connect. " . $e->getMessage());
+                    die("ERROR: Could not connect. Host: {$dbhost}, DB: {$dbname}, User: {$username}, Error: " .
+                        $e->getMessage());
                 }
             }
             return self::$pdo;

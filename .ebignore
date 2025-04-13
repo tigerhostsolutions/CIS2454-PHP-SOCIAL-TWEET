@@ -1,0 +1,12 @@
+.idea/
+*.env
+*.log
+node_modules/
+vendor/
+qodana.yaml
+testfilepush.php
+.github
+.gitignore
+.env
+qodana.
+README.md
