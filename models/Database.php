@@ -8,7 +8,7 @@ class Database
 {
     private static $connections = [];
 
-    public static function getConnection($type = '')
+    public static function getConnection($type = 'remote')
     {
         if (!isset(self::$connections[$type])) {
             self::$connections[$type] = self::createConnection($type);
