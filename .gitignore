@@ -4,7 +4,7 @@
    .github/workflows/qodana_code_quality.yml
 
     #Composer
-    /vendor/
+    vendor
     composer.phar
 
     # PHPStorm

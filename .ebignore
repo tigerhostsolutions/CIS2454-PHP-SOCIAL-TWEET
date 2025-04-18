@@ -10,7 +10,7 @@
 node_modules/
 
 # PHP dependencies
-vendor/
+vendor
 composer.phar
 
 # Qodana and testing
