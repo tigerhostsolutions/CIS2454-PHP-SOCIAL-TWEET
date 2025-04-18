@@ -3,7 +3,7 @@
         'name' => 'tigerhostsolutions/cis2454-bad-twitter-php',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '9010a5f7ef74ecf1362dfb97fcb2500a259563a2',
+        'reference' => '6dfc7055a490eec58226bbdff2371c10f3c1ea40',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -58,7 +58,7 @@
         'tigerhostsolutions/cis2454-bad-twitter-php' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '9010a5f7ef74ecf1362dfb97fcb2500a259563a2',
+            'reference' => '6dfc7055a490eec58226bbdff2371c10f3c1ea40',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
