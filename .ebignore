@@ -1,7 +1,6 @@
 # IDE and environment files
 .idea/
 .env
-*.env
 
 # Logs and debug
 *.log
@@ -10,7 +9,6 @@
 node_modules/
 
 # PHP dependencies
-vendor
 composer.phar
 
 # Qodana and testing
