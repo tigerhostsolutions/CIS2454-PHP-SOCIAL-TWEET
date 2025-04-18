@@ -1,12 +1,24 @@
+# IDE and environment files
 .idea/
-*.env
-*.log
-node_modules/
-vendor/
-qodana.yaml
-testfilepush.php
-.github
-.gitignore
 .env
-qodana.
+*.env
+
+# Logs and debug
+*.log
+
+# Node (if applicable)
+node_modules/
+
+# PHP dependencies
+vendor/
+composer.phar
+
+# Qodana and testing
+qodana.yaml
+qodana.*
+testfilepush.php
+
+# Git and docs
+.github/
+.gitignore
 README.md

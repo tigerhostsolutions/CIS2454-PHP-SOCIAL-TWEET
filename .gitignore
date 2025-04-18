@@ -1,5 +1,4 @@
-    .env
-    .env-production
+# .gitignore
     .env
     qodana.yaml
    .github/workflows/qodana_code_quality.yml
@@ -51,6 +50,7 @@
     # Specific IDE files
     .vscode/
     *.code-workspace
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
