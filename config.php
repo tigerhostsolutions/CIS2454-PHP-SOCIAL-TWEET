@@ -19,9 +19,9 @@
         define('BASE_URL', $protocol . $host . $projectRoot);
     }
 // Directory Paths
-    define('BASE_DIR', __DIR__); // Project root directory
-    define('CSS_PATH', BASE_URL . 'css/');
-    define('UPLOAD_PATH', BASE_URL . 'uploads/');
-    define('CONTROLLER_PATH', BASE_URL . 'controllers/');
-    define('MODEL_PATH', BASE_URL . 'models/');
-    define('VIEW_PATH', BASE_URL . 'views/');
+    const BASE_DIR = __DIR__; // Project root directory
+    const CSS_PATH = BASE_URL . 'css/';
+    const UPLOAD_PATH = BASE_URL . 'uploads/';
+    const CONTROLLER_PATH = BASE_URL . 'controllers/';
+    const MODEL_PATH = BASE_URL . 'models/';
+    const VIEW_PATH = BASE_URL . 'views/';
