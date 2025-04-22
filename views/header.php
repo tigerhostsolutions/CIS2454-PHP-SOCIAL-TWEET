@@ -1,13 +1,12 @@
 <?php
     // header.php
     require_once __DIR__ . '/../config.php';
-
 ?>
 <!DOCTYPE html>
 <html lang = "en" >
 <head >
     <title >Twitter Clone</title >
-    <link rel = "stylesheet" type = "text/css" href = "<?= CSS_PATH ?>styles.css" >
+    <link rel = "stylesheet" type = "text/css" href = "<?= CSS_URL ?>styles.css" >
 </head >
 <body >
 <header >
@@ -19,7 +18,7 @@
                 </div >
                 <br >
                 <a href = "<?= BASE_URL ?>index.php" target = "_self" >Home</a >
-                <a href = "<?= BASE_URL ?>views/profile.php?id=<?= htmlspecialchars($_SESSION['user_id']);
+                <a href = "<?= VIEW_URL ?>profile.php?id=<?= htmlspecialchars($_SESSION['user_id']);
                 ?>" target = "_self" >Profile</a >
                 <form method = "POST" action = "<?= BASE_URL ?>logout.php" target = "_self"
                       style = "display:inline;" >
