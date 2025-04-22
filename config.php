@@ -18,10 +18,17 @@
         $projectRoot = rtrim(str_replace('/views', '', $scriptDir)) . '/';
         define('BASE_URL', $protocol . $host . $projectRoot);
     }
-// Directory Paths
-    const BASE_DIR = __DIR__; // Project root directory
-    const CSS_PATH = BASE_URL . 'css/';
-    const UPLOAD_PATH = BASE_URL . 'uploads/';
-    const CONTROLLER_PATH = BASE_URL . 'controllers/';
-    const MODEL_PATH = BASE_URL . 'models/';
-    const VIEW_PATH = BASE_URL . 'views/';
+    /*
+     * Base URL for the application
+     * This is used to generate links to assets like CSS, JS, and images.
+     */
+    const CSS_URL = BASE_URL . 'css/';
+    const UPLOAD_URL = BASE_URL . 'uploads/';
+    const VIEW_URL = BASE_URL . 'views/';
+    /*
+     * Directory paths for controllers, models, and views
+     * These are used to include the respective files in the application.
+     */
+    const CONTROLLER_PATH = __DIR__ . '/controllers/';
+    const MODEL_PATH = __DIR__ . '/models/';
+    const VIEW_PATH = __DIR__ . '/views/';
