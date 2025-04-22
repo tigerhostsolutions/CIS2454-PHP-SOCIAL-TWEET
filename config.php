@@ -15,7 +15,8 @@
         
         // Use the script's directory name to avoid file-specific paths
         $scriptDir = dirname($_SERVER['SCRIPT_NAME']);
-        $projectRoot = rtrim(str_replace('/views', '', $scriptDir)) . '/';
+        $projectRoot = rtrim(str_replace('/views', '', $scriptDir)) ;
+//        $projectRoot = rtrim(str_replace('/views', '', $scriptDir)) . '/';
         define('BASE_URL', $protocol . $host . $projectRoot);
     }
     /*
