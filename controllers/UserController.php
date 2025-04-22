@@ -2,8 +2,8 @@
     // UserController.php
     
     require_once __DIR__ . '/../config.php';
-    require_once BASE_DIR . '/models/Tweet.php';
-    require_once BASE_DIR . '/models/User.php';
+    require_once MODEL_PATH . 'Tweet.php';
+    require_once MODEL_PATH . 'User.php';
     
     class UserController
     {
@@ -33,7 +33,7 @@
             $isFollowing = FALSE; // The user cannot follow themselves
             
             // Pass variables to the view
-            require_once BASE_DIR . '/views/profile.php';
+            require_once VIEW_PATH . 'profile.php';
         }
         
         private static function updateProfile($userId)

@@ -4,7 +4,7 @@
     session_start();
     
     require_once __DIR__ . '/config.php';
-    require_once BASE_DIR . '/models/Database.php';
+    require_once MODEL_PATH . 'Database.php';
     
     $tweets = $pdo->query("SELECT tweets.*, users.username FROM tweets JOIN users ON tweets.user_id = users.id ORDER BY tweets.created_at DESC");
     foreach ($tweets as $tweet) {

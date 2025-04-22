@@ -10,9 +10,9 @@
     }
     
     require_once __DIR__ . '/../config.php';
-    require_once BASE_DIR . '/views/header.php';
-    require_once BASE_DIR . '/models/Tweet.php';
-    require_once BASE_DIR . '/models/User.php';
+    require_once VIEW_PATH . 'header.php';
+    require_once MODEL_PATH . 'Tweet.php';
+    require_once MODEL_PATH . 'User.php';
     
     $loggedInUserId = $_SESSION['user_id']; // Get the logged-in user's ID
     $profileUser = User::getById($loggedInUserId); // Fetch user data
@@ -126,5 +126,5 @@
 </main>
 
 <?php
-    require_once BASE_DIR . '/views/footer.php';
+    require_once VIEW_PATH . 'footer.php';
 ?>
