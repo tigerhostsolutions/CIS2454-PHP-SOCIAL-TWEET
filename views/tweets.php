@@ -1,5 +1,8 @@
 <?php
     // tweets.php
+    use App\Models\Tweet;
+    use App\Models\User;
+    
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
@@ -7,11 +10,13 @@
         header("Location: login.php");
         exit;
     }
-    
     require_once __DIR__ . '/../config.php';
     require_once VIEW_PATH . 'header.php';
     require_once MODEL_PATH . 'Tweet.php';
     require_once MODEL_PATH . 'Database.php';
+    
+    // Fetch the username of the logged-in user
+    $username = User::getUsernameById($_SESSION['user_id']);
 ?>
 
     <main >

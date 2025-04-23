@@ -1,5 +1,7 @@
 <?php
     // Like.php
+    namespace App\Models;
+    
     require_once __DIR__ . '/../config.php';
     require_once MODEL_PATH . 'Database.php';
     

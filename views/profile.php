@@ -1,14 +1,15 @@
 <?php
     // profile.php
+    use App\Models\Tweet;
+    use App\Models\User;
+    
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    
     if (!isset($_SESSION['user_id'])) {
         header("Location: login.php");
         exit;
     }
-    
     require_once __DIR__ . '/../config.php';
     require_once VIEW_PATH . 'header.php';
     require_once MODEL_PATH . 'Tweet.php';
@@ -27,7 +28,7 @@
         <!-- Form and Tweets Container -->
         <div class="tweets-and-form">
             <!-- Form Section -->
-            <form class="tweet-form" method="POST" action="profile.php" enctype="multipart/form-data">
+            <form class="tweet-form" method="POST" action="<?= BASE_URL ?>index.php" enctype="multipart/form-data">
                 <h2>Compose a Tweet</h2>
                 <label>
                     <textarea name="content" placeholder="What's happening?" required></textarea>

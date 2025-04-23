@@ -1,5 +1,7 @@
 <?php
     // login.php
+    use App\Models\Database;
+    
     session_start();
     
     require_once __DIR__ . '/config.php';

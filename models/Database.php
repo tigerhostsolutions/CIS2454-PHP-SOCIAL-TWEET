@@ -1,8 +1,12 @@
 <?php
 // Database.php
+namespace App\Models;
+    
 require_once __DIR__ . '/../vendor/autoload.php'; // Autoload for phpdotenv
 
 use Dotenv\Dotenv;
+use PDO;
+use PDOException;
 
 class Database
 {

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang = "en" >
 <head >
-    <title >Twitter Clone</title >
+    <title >Social Tweet</title >
     <link rel = "stylesheet" type = "text/css" href = "<?= CSS_URL ?>styles.css" >
 </head >
 <body >

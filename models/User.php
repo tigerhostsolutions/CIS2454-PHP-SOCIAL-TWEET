@@ -1,5 +1,9 @@
 <?php
     // User.php
+    namespace App\Models;
+    
+    use PDO;
+    
     require_once __DIR__ . '/../config.php';
     require_once MODEL_PATH . 'Database.php';
     
@@ -45,7 +49,8 @@
             $stmt->execute(['username' => $username, 'email' => $email, 'id' => $userId]);
         }
         
-        public static function getFollowing($userId) {
+        public static function getFollowing($userId)
+        {
             $db = Database::getConnection();
             $query = "SELECT u.id, u.username, u.email, u.bio, u.profile_pic
               FROM users u
@@ -62,5 +67,13 @@
             $stmt = $pdo->prepare("SELECT users.* FROM follows JOIN users ON follows.follower_id = users.id WHERE follows.following_id = :user_id");
             $stmt->execute(['user_id' => $userId]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+        public static function getUsernameById($userId)
+        {
+            $db = Database::getConnection();
+            $stmt = $db->prepare("SELECT username FROM users WHERE id = ?");
+            $stmt->execute([$userId]);
+            return $stmt->fetchColumn();
         }
     }

@@ -1,5 +1,12 @@
 <?php
     // TweetController.php
+    namespace App\Controllers;
+    
+    use App\Models\Database;
+    use App\Models\Tweet;
+    use App\Models\User;
+    use PDO;
+    
     require_once __DIR__ . '/../config.php';
     require_once MODEL_PATH . 'Tweet.php';
     require_once MODEL_PATH . 'Like.php';

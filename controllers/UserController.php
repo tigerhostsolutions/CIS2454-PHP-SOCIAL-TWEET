@@ -1,5 +1,9 @@
 <?php
     // UserController.php
+    namespace App\Controllers;
+    
+    use App\Models\Tweet;
+    use App\Models\User;
     
     require_once __DIR__ . '/../config.php';
     require_once MODEL_PATH . 'Tweet.php';
