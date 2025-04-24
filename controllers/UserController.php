@@ -42,8 +42,8 @@
         
         private static function updateProfile($userId)
         {
-            $username = $_POST['username'];
-            $email = $_POST['email'];
+            $username = trim($_POST['username']);
+            $email = trim($_POST['email']);
             User::update($userId, $username, $email);
             header("Location: profile.php");
             exit;

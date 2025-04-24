@@ -66,7 +66,10 @@
             }
             
             Tweet::create($_SESSION['user_id'], $content, $imagePath);
-            header("Location: index.php");
+           
+            // Redirect back to the referring page
+            $redirectUrl = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+            header("Location: $redirectUrl");
             exit;
         }
         

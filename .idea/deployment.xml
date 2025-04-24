@@ -6,7 +6,7 @@
       <paths name="localhost:80">
         <serverdata>
           <mappings>
-            <mapping deploy="\sites\cis2454-bad-twitter-php" local="$PROJECT_DIR$" web="/sites/cis2454-bad-twitter-php" />
+            <mapping deploy="sites\cis2454-php-socialtweet-local" local="$PROJECT_DIR$" web="/sites/cis2454-php-socialtweet-local" />
           </mappings>
         </serverdata>
       </paths>

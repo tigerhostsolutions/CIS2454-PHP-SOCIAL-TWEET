@@ -28,7 +28,7 @@
         <!-- Form and Tweets Container -->
         <div class="tweets-and-form">
             <!-- Form Section -->
-            <form class="tweet-form" method="POST" action="<?= BASE_URL ?>index.php" enctype="multipart/form-data">
+            <form class="tweet-form" method="POST" action="<?= BASE_URL ?>profile.php" enctype="multipart/form-data">
                 <h2>Compose a Tweet</h2>
                 <label>
                     <textarea name="content" placeholder="What's happening?" required></textarea>
