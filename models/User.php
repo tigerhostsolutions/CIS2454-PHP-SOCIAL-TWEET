@@ -42,13 +42,6 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         
-        public static function update($userId, $username, $email)
-        {
-            $pdo = Database::getConnection();
-            $stmt = $pdo->prepare("UPDATE users SET username = :username, email = :email WHERE id = :id");
-            $stmt->execute(['username' => $username, 'email' => $email, 'id' => $userId]);
-        }
-        
         public static function getFollowing($userId)
         {
             $db = Database::getConnection();

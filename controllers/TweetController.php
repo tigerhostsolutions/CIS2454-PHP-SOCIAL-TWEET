@@ -47,31 +47,31 @@
             require_once VIEW_PATH . 'tweets.php';
         }
         
-        private static function createTweet() {
-            $content = $_POST['content'];
-            $imagePath = NULL;
-            
-            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                $imageTmpPath = $_FILES['image']['tmp_name'];
-                $imageName = basename($_FILES['image']['name']);
-                $imagePath = 'uploads/' . $imageName;
-                
-                if (!is_writable('uploads')) {
-                    die("Uploads directory is not writable.");
-                }
-                
-                if (!move_uploaded_file($imageTmpPath, $imagePath)) {
-                    die("Error uploading image. Temp path: $imageTmpPath, Destination path: $imagePath");
-                }
-            }
-            
-            Tweet::create($_SESSION['user_id'], $content, $imagePath);
-           
-            // Redirect back to the referring page
-            $redirectUrl = $_SERVER['HTTP_REFERER'] ?? 'index.php';
-            header("Location: $redirectUrl");
-            exit;
-        }
+       public static function createTweet() {
+           $content = $_POST['content'];
+           $imagePath = null;
+       
+           if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+               $imageTmpPath = $_FILES['image']['tmp_name'];
+               $imageName = basename($_FILES['image']['name']);
+               $imagePath = 'uploads/' . $imageName;
+       
+               if (!is_writable('uploads')) {
+                   die("Uploads directory is not writable.");
+               }
+       
+               if (!move_uploaded_file($imageTmpPath, $imagePath)) {
+                   die("Error uploading image.");
+               }
+           }
+       
+           Tweet::create($_SESSION['user_id'], $content, $imagePath);
+       
+           // Redirect back to the referring page
+           $redirectUrl = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+           header("Location: $redirectUrl");
+           exit;
+       }
         
         private static function likeTweet() {
             $tweetId = filter_var($_POST['like_tweet_id'], FILTER_SANITIZE_NUMBER_INT);
