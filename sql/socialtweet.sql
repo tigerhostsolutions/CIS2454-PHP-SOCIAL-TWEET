@@ -1,3 +1,9 @@
+-- Drop tables if they exist
+DROP TABLE IF EXISTS likes;
+DROP TABLE IF EXISTS follows;
+DROP TABLE IF EXISTS tweets;
+DROP TABLE IF EXISTS users;
+
 -- Users Table
 CREATE TABLE users (
                        id INT AUTO_INCREMENT PRIMARY KEY,
@@ -39,15 +45,4 @@ CREATE TABLE likes (
                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                        FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
                        FOREIGN KEY (tweet_id) REFERENCES tweets (id) ON DELETE CASCADE
-);
-
--- Comments Table
-CREATE TABLE comments (
-                          id INT AUTO_INCREMENT PRIMARY KEY,
-                          tweet_id INT NOT NULL,
-                          user_id INT NOT NULL,
-                          content TEXT NOT NULL,
-                          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                          FOREIGN KEY (tweet_id) REFERENCES tweets (id) ON DELETE CASCADE,
-                          FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
