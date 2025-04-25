@@ -2,6 +2,7 @@
     .env
     qodana.yaml
    .github/workflows/qodana_code_quality.yml
+uploads
 
     #Composer
     composer.phar
@@ -49,8 +50,3 @@
     # Specific IDE files
     .vscode/
     *.code-workspace
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml

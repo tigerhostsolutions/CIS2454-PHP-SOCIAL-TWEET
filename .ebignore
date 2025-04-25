@@ -14,9 +14,10 @@ composer.phar
 # Qodana and testing
 qodana.yaml
 qodana.*
-testfilepush.php
 
 # Git and docs
 .github/
 .gitignore
 README.md
+
+uploads
