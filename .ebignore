@@ -10,13 +10,15 @@ node_modules/
 
 # PHP dependencies
 composer.phar
+vendor
 vendor/
 
 # Qodana and testing
 qodana.yaml
 qodana.*
 
-# Git and docs
+# Git and doc
+.DS_Store
 .github/
 .gitignore
 README.md

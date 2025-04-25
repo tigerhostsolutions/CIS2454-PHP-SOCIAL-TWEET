@@ -6,6 +6,7 @@
 
     #Composer
     composer.phar
+    vendor
     vendor/
 
     # PHPStorm
