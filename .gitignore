@@ -1,0 +1,49 @@
+# IDE and environment files
+.idea/
+.env
+
+# Logs and debug
+*.log
+
+# Node (if applicable)
+node_modules/
+
+# PHP dependencies
+composer.phar
+vendor/
+
+# Git and doc
+.DS_Store
+
+# Uploads
+uploads
+
+# Laravel related (if applicable)
+.phpunit.result.cache
+/public/storage
+/storage/*.key
+/storage/oauth-private.key
+/storage/oauth-public.key
+/storage/logs/*
+/bootstrap/cache/*
+
+# Symfony related (if applicable)
+/var/
+/.env.local
+.env.local.php
+.env.*.local
+/phpunit.result.cache
+
+# Cache and logs
+/cache/
+*.cache
+*.class
+
+# General system files
+Thumbs.db
+*.swp
+*.swo
+
+# Specific IDE files
+.vscode/
+*.code-workspace

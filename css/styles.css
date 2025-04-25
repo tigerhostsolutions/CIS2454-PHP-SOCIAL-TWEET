@@ -1,0 +1,291 @@
+/* styles.css */
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1, h2 {
+    color: #333;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Layout Styles for Tweets and Form */
+.tweets-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap; /* Ensures responsiveness on smaller screens */
+}
+
+/* Form and Tweets Container */
+.tweets-and-form {
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+    gap: 20px;
+}
+
+/* Form Section */
+.tweet-form {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tweet-form h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.tweet-form textarea {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.tweet-form input[type="file"] {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.tweet-form button {
+    background-color: #007bff;
+    color: white;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* Tweets Section */
+.tweets {
+    flex: 2;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tweets h1 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.tweets-list {
+    list-style: none;
+    padding: 0;
+}
+
+.tweet-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.tweet-item img.tweet-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* Button Styles */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px; /* Reduced padding */
+    border: none;
+    border-radius: 5px;
+    font-size: 0.8rem; /* Smaller font size for compact buttons */
+    cursor: pointer;
+    margin-right: 5px; /* Align buttons side-by-side */
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Like and Unlike Buttons */
+.like-button {
+    padding: 5px 8px; /* Compact padding for smaller buttons */
+    font-size: 0.8rem; /* Smaller font size */
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.like-button.like {
+    background-color: #007bff; /* Blue for like */
+    color: white;
+}
+
+.like-button.unlike {
+    background-color: #dc3545; /* Red for unlike */
+    color: white;
+}
+
+.like-button:hover {
+    opacity: 0.9; /* Slight hover effect */
+}
+
+/* Tweet Actions Buttons */
+.tweet-buttons {
+    display: flex; /* Align action buttons side-by-side */
+    gap: 5px; /* Space between buttons */
+}
+
+.tweet-buttons button {
+    font-size: 0.8rem;
+    padding: 5px 8px; /* Compact padding */
+}
+
+/* User Info Section */
+.users {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.users h2 {
+    margin: 0 0 15px;
+    text-align: center;
+}
+
+.users-list {
+    list-style: none;
+    padding: 0;
+}
+
+.users-list li {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/* User Actions Buttons */
+.users-list .user-actions {
+    display: flex; /* Align buttons side-by-side */
+    gap: 5px; /* Space between buttons */
+}
+
+.users-list .user-actions button {
+    font-size: 0.8rem;
+    padding: 4px 8px; /* Reduced padding for compact styles */
+    margin-right: 5px;
+    border-radius: 4px;
+}
+
+/* Followers and Following Container */
+.followers-following-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.followers-section, .following-section {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: calc(50% - 10px);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.followers-list, .following-list {
+    list-style: none;
+    padding: 0;
+}
+
+.follower-item, .following-item {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.follower-item:hover, .following-item:hover {
+    background: #f1f1f1;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .tweets-layout {
+        flex-direction: column;
+    }
+
+    .tweets-and-form, .users {
+        width: 100%;
+    }
+
+    .followers-following-section {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .followers-section, .following-section {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    button {
+        padding: 4px 8px; /* Further reduced padding for smaller devices */
+        font-size: 0.75rem; /* Smaller font size */
+    }
+
+    .tweet-buttons {
+        flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    }
+
+    body {
+        padding: 10px;
+    }
+
+    .tweet, .followers-section, .following-section {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .tweet-header {
+        font-size: 12px;
+    }
+
+    .tweet-content {
+        font-size: 14px;
+    }
+
+    .tweet-form textarea {
+        height: 60px;
+    }
+}
