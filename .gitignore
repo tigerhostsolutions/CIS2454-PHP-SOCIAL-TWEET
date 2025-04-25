@@ -1,54 +1,62 @@
-# .gitignore
-    .env
-    qodana.yaml
-   .github/workflows/qodana_code_quality.yml
-    uploads
+# IDE and environment files
+.idea/
+.env
 
-    #Composer
-    composer.phar
-    vendor
-    vendor/
+# Logs and debug
+*.log
 
-    # PHPStorm
-    .idea/
-    *.iml
-    .idea/dataSources.xml
+# Node (if applicable)
+node_modules/
 
-    # Node
-    /node_modules/
-    npm-debug.log*
-    yarn-debug.log*
-    yarn-error.log*
+# PHP dependencies
+composer.phar
+vendor/
+vendor
 
-    # Laravel related (if applicable)
-    /.env
-    .phpunit.result.cache
-    /public/storage
-    /storage/*.key
-    /storage/oauth-private.key
-    /storage/oauth-public.key
-    /storage/logs/*
-    /bootstrap/cache/*
+# Qodana and testing
+qodana.yaml
+qodana.*
 
-    # Symfony related (if applicable)
-    /var/
-    /.env.local
-    .env.local.php
-    .env.*.local
-    /phpunit.result.cache
+# Git and doc
+.DS_Store
+.github/
+.gitignore
+README.md
 
-    # Cache and logs
-    *.log
-    /cache/
-    /*.cache
-    *.class
+# Uploads
+uploads
 
-    # General system files
-    .DS_Store
-    Thumbs.db
-    *.swp
-    *.swo
+# PHPStorm
+*.iml
+.idea/dataSources.xml
 
-    # Specific IDE files
-    .vscode/
-    *.code-workspace
+# Laravel related (if applicable)
+/.env
+.phpunit.result.cache
+/public/storage
+/storage/*.key
+/storage/oauth-private.key
+/storage/oauth-public.key
+/storage/logs/*
+/bootstrap/cache/*
+
+# Symfony related (if applicable)
+/var/
+/.env.local
+.env.local.php
+.env.*.local
+/phpunit.result.cache
+
+# Cache and logs
+/cache/
+*.cache
+*.class
+
+# General system files
+Thumbs.db
+*.swp
+*.swo
+
+# Specific IDE files
+.vscode/
+*.code-workspace
