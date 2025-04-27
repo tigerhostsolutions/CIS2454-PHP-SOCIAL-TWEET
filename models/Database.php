@@ -12,7 +12,7 @@ class Database
 {
     private static $connections = [];
 
-    public static function getConnection($type = 'remote')
+    public static function getConnection($type = 'local')
     {
         if (!isset(self::$connections[$type])) {
             self::$connections[$type] = self::createConnection($type);
@@ -27,10 +27,10 @@ class Database
         $dotenv->load();
 
         /* DB credentials */
-        $username = $_ENV['DB_USER'] ?? getenv('DB_USER');
-        $password = $_ENV['DB_PASS'] ?? getenv('DB_PASS');
-        $dbname = $_ENV['DB_NAME'];
-        $dbport = $_ENV['DB_PORT'];
+        $username = $_ENV['DB_USER'] ?? getenv('DB_USER') ?? 'root';
+        $password = $_ENV['DB_PASS'] ?? getenv('DB_PASS') ?? 'root';
+        $dbname = $_ENV['DB_NAME'] ?? '';
+        $dbport = $_ENV['DB_PORT'] ?? '8889';
 
         /* Determine host */
         $dbhost = $type === 'remote'
