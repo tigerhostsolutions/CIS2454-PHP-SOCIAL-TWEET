@@ -10,13 +10,40 @@ node_modules/
 
 # PHP dependencies
 composer.phar
+vendor/
 
-# Qodana and testing
-qodana.yaml
-qodana.*
-testfilepush.php
+# Git and doc
+.DS_Store
 
-# Git and docs
-.github/
-.gitignore
-README.md
+# Uploads
+uploads
+
+# Laravel related (if applicable)
+.phpunit.result.cache
+/public/storage
+/storage/*.key
+/storage/oauth-private.key
+/storage/oauth-public.key
+/storage/logs/*
+/bootstrap/cache/*
+
+# Symfony related (if applicable)
+/var/
+/.env.local
+.env.local.php
+.env.*.local
+/phpunit.result.cache
+
+# Cache and logs
+/cache/
+*.cache
+*.class
+
+# General system files
+Thumbs.db
+*.swp
+*.swo
+
+# Specific IDE files
+.vscode/
+*.code-workspace

@@ -20,15 +20,51 @@
             }
             
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                self::updateProfile($_SESSION['user_id']);
+                if (isset($_POST['action'])) {
+                    switch ($_POST['action']) {
+                        case 'tweet':
+                            TweetController::createTweet();
+                            break;
+                        case 'follow':
+                            self::followUser();
+                            break;
+                        case 'unfollow':
+                            self::unfollowUser();
+                            break;
+                        default:
+                            header("Location: profile.php?error=invalid_action");
+                            exit;
+                    }
+                }
             } else {
-                self::showProfile($_SESSION['user_id']);
+                self::showProfile();
             }
         }
         
+        private static function followUser()
+        {
+            $followerId = $_SESSION['user_id'];
+            $followingId = $_POST['following_id'] ?? NULL;
+            
+            if ($followingId) {
+                User::follow($followerId, $followingId);
+            }
+            header("Location: profile.php");
+            exit;
+        }
+        
+        private static function unfollowUser()
+        {
+            $followerId = $_SESSION['user_id'];
+            $followingId = $_POST['following_id'] ?? NULL;
+            if ($followingId) {
+                User::unfollow($followerId, $followingId);
+            }
+            header("Location: profile.php");
+            exit;
+        }
         private static function showProfile()
         {
-            // Fetch user data
             $userId = $_SESSION['user_id'];
             $user = User::getById($userId);
             $following = User::getFollowing($userId);
@@ -38,14 +74,5 @@
             
             // Pass variables to the view
             require_once VIEW_PATH . 'profile.php';
-        }
-        
-        private static function updateProfile($userId)
-        {
-            $username = $_POST['username'];
-            $email = $_POST['email'];
-            User::update($userId, $username, $email);
-            header("Location: profile.php");
-            exit;
         }
     }

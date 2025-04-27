@@ -27,18 +27,6 @@
     <div class="tweets-layout">
         <!-- Form and Tweets Container -->
         <div class="tweets-and-form">
-            <!-- Form Section -->
-            <form class="tweet-form" method="POST" action="<?= BASE_URL ?>index.php" enctype="multipart/form-data">
-                <h2>Compose a Tweet</h2>
-                <label>
-                    <textarea name="content" placeholder="What's happening?" required></textarea>
-                </label>
-                <label>
-                    <input type="file" name="image" accept="image/*">
-                </label>
-                <button type="submit">Tweet</button>
-            </form>
-
             <!-- Tweets Section -->
             <section class="tweets">
                 <h1>Your Tweets, <?php echo htmlspecialchars($profileUser['username']); ?>!</h1>

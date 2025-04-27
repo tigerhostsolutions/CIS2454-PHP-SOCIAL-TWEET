@@ -42,17 +42,10 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         
-        public static function update($userId, $username, $email)
-        {
-            $pdo = Database::getConnection();
-            $stmt = $pdo->prepare("UPDATE users SET username = :username, email = :email WHERE id = :id");
-            $stmt->execute(['username' => $username, 'email' => $email, 'id' => $userId]);
-        }
-        
         public static function getFollowing($userId)
         {
             $db = Database::getConnection();
-            $query = "SELECT u.id, u.username, u.email, u.bio, u.profile_pic
+            $query = "SELECT u.id, u.username, u.email
               FROM users u
               INNER JOIN follows f ON f.following_id = u.id
               WHERE f.follower_id = :userId";

@@ -20,6 +20,7 @@
         $stmt->execute(['username' => $username, 'email' => $email, 'password' => $password]);
         
         $_SESSION['user_id'] = $pdo->lastInsertId();
+        $_SESSION['username'] = $username; // Store username in session
         header("Location: index.php");
     }
 ?>

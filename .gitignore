@@ -1,56 +1,49 @@
-# .gitignore
-    .env
-    qodana.yaml
-   .github/workflows/qodana_code_quality.yml
+# IDE and environment files
+.idea/
+.env
 
-    #Composer
-    composer.phar
+# Logs and debug
+*.log
 
-    # PHPStorm
-    .idea/
-    *.iml
-    .idea/dataSources.xml
+# Node (if applicable)
+node_modules/
 
-    # Node
-    /node_modules/
-    npm-debug.log*
-    yarn-debug.log*
-    yarn-error.log*
+# PHP dependencies
+composer.phar
+vendor/
 
-    # Laravel related (if applicable)
-    /.env
-    .phpunit.result.cache
-    /public/storage
-    /storage/*.key
-    /storage/oauth-private.key
-    /storage/oauth-public.key
-    /storage/logs/*
-    /bootstrap/cache/*
+# Git and doc
+.DS_Store
 
-    # Symfony related (if applicable)
-    /var/
-    /.env.local
-    .env.local.php
-    .env.*.local
-    /phpunit.result.cache
+# Uploads
+uploads
 
-    # Cache and logs
-    *.log
-    /cache/
-    /*.cache
-    *.class
+# Laravel related (if applicable)
+.phpunit.result.cache
+/public/storage
+/storage/*.key
+/storage/oauth-private.key
+/storage/oauth-public.key
+/storage/logs/*
+/bootstrap/cache/*
 
-    # General system files
-    .DS_Store
-    Thumbs.db
-    *.swp
-    *.swo
+# Symfony related (if applicable)
+/var/
+/.env.local
+.env.local.php
+.env.*.local
+/phpunit.result.cache
 
-    # Specific IDE files
-    .vscode/
-    *.code-workspace
+# Cache and logs
+/cache/
+*.cache
+*.class
 
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+# General system files
+Thumbs.db
+*.swp
+*.swo
+
+# Specific IDE files
+.vscode/
+*.code-workspace
