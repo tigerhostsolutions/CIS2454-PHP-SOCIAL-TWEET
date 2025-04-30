@@ -13,12 +13,11 @@
     } else {
         // Web Server Mode: Calculate consistently from project root
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
-//        $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
         $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
         
         // Use the script's directory name to avoid file-specific paths
         $scriptDir = dirname($_SERVER['SCRIPT_NAME']);
-        $projectRoot = rtrim(str_replace('/views', '', $scriptDir)) . '/';
+        $projectRoot = rtrim(str_replace('/views', '', $scriptDir), '/') . '/';
         define('BASE_URL', $protocol . $host . $projectRoot);
     }
     /*
