@@ -1,4 +1,6 @@
 <?php
+    /* https://yagudaev.com/posts/resolving-php-relative-path-problem/*/
+    
     // base_url_config
     if (php_sapi_name() === 'cli') {
         // CLI Mode: Dynamically calculate
@@ -11,7 +13,8 @@
     } else {
         // Web Server Mode: Calculate consistently from project root
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
-        $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
+//        $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
+        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
         
         // Use the script's directory name to avoid file-specific paths
         $scriptDir = dirname($_SERVER['SCRIPT_NAME']);
