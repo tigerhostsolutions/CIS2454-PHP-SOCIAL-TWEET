@@ -1,0 +1,15 @@
+files:
+  "/etc/nginx/conf.d/01_block_hidden_files.conf":
+    mode: "000644"
+    owner: root
+    group: root
+    content: |
+      location ~ /\.(?!well-known).* {
+          deny all;
+          return 403;
+      }
+
+commands:
+  01_reload_nginx:
+    command: "nginx -s reload"
+    ignoreErrors: false
