@@ -30,9 +30,9 @@
                     <label >
                         <textarea name = "content" placeholder = "What's happening?" required ></textarea >
                     </label >
-                    <label >
-                        <input type = "file" name = "image" accept = "image/*" >
-                    </label >
+<!--                    <label >-->
+<!--                        <input type = "file" name = "image" accept = "image/*" >-->
+<!--                    </label >-->
                     <button type = "submit" >Tweet</button >
                 </form >
 
