@@ -1,5 +1,12 @@
 <?php
-    // login.php
+    /**
+     * login.php
+     *
+     * This script handles user authentication for the Social Tweet application.
+     * It processes login form submissions, verifies user credentials against
+     * the database, and establishes a user session upon successful login.
+     */
+    
     use App\Models\Database;
     
     session_start();

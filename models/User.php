@@ -1,5 +1,13 @@
 <?php
-    // User.php
+    /**
+     * User.php
+     *
+     * This file defines the `User` class, which serves as the model for
+     * managing user-related operations in the Social Tweet application.
+     * It provides static methods for retrieving user information, and
+     * handling follow/unfollow relationships between users.
+     */
+    
     namespace App\Models;
     
     use PDO;

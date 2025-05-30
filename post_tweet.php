@@ -1,5 +1,13 @@
 <?php
-    // post_tweet.php
+    /**
+     * post_tweet.php
+     *
+     * This script handles the display of existing tweets and the submission
+     * of new tweets for the Social Tweet application. It retrieves tweets
+     * from the database, displays them, and processes new tweet submissions
+     * from authenticated users.
+     */
+    
     global $pdo;
     session_start();
     

@@ -1,5 +1,15 @@
 <?php
-    // TweetController.php
+    /**
+     * TweetController.php
+     *
+     * This file defines the `TweetController` class, which acts as the central
+     * handler for all tweet-related actions and interactions within the
+     * Social Tweet application. It manages user authentication, processes
+     * various POST and GET requests (like creating tweets, liking/unliking,
+     * following/unfollowing users, and displaying data), and orchestrates
+     * communication between the models (Tweet, User, Database) and the views.
+     */
+    
     namespace App\Controllers;
     
     use App\Models\Database;

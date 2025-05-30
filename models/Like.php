@@ -1,5 +1,12 @@
 <?php
-    // Like.php
+    /**
+     * Like.php
+     *
+     * This file defines the `Like` class, which handles the logic for
+     * users to like and unlike tweets in the Social Tweet application.
+     * It interacts directly with the database to record and remove like relationships.
+     */
+    
     namespace App\Models;
     
     require_once __DIR__ . '/../config.php';

@@ -1,5 +1,12 @@
 <?php
-    // profile.php
+    /**
+     * profile.php
+     *
+     * This file serves as the view for displaying a user's profile in the Social Tweet application.
+     * It presents the user's own tweets, tweets from users they follow, and lists of their followers and who they are following.
+     * This file is typically included by the `UserController` after all necessary data has been fetched.
+     */
+    
     use App\Models\Tweet;
     use App\Models\User;
     

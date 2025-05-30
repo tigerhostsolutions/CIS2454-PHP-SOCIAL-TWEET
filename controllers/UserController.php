@@ -1,5 +1,13 @@
 <?php
-    // UserController.php
+    /**
+     * UserController.php
+     *
+     * This file defines the `UserController` class, which is responsible for
+     * managing user-specific actions and profile-related functionalities
+     * within the Social Tweet application. It handles requests for viewing
+     * user profiles, and managing follow/unfollow relationships.
+     */
+    
     namespace App\Controllers;
     
     use App\Models\Tweet;

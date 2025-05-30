@@ -1,5 +1,13 @@
 <?php
-// Database.php
+    /**
+     * Database.php
+     *
+     * This file defines the `Database` class, which is responsible for establishing
+     * and managing database connections using PDO (PHP Data Objects). It supports
+     * loading environment variables from a .env file and provides a singleton-like
+     * pattern for database connections to prevent multiple connections to the same database.
+     */
+    
     namespace App\Models;
     
     require_once __DIR__ . '/../vendor/autoload.php'; // Composer autoload

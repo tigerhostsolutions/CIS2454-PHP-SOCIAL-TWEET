@@ -1,5 +1,14 @@
 <?php
-    // tweets.php
+    /**
+     * tweets.php
+     *
+     * This file serves as the main view for displaying the tweet feed and
+     * related user interactions in the Social Tweet application.
+     * It includes the tweet composition form, lists of tweets, and a list of other users.
+     * This file is typically included by a controller (e.g., TweetController)
+     * after data has been prepared.
+     */
+    
     use App\Models\Tweet;
     use App\Models\User;
     

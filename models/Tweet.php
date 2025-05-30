@@ -1,5 +1,13 @@
 <?php
-    // Tweet.php
+    /**
+     * Tweet.php
+     *
+     * This file defines the `Tweet` class, which serves as the primary model
+     * for managing tweet-related operations in the Social Tweet application.
+     * It provides static methods for creating, retrieving, liking, and unliking tweets,
+     * interacting directly with the 'tweets' and 'likes' tables in the database.
+     */
+    
     namespace App\Models;
     
     use PDO;

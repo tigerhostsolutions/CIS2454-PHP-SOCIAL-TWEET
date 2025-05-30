@@ -1,7 +1,16 @@
 <?php
-    /* https://yagudaev.com/posts/resolving-php-relative-path-problem/*/
+    /**
+     * config.php
+     *
+     * This file serves as the central configuration hub for the Social Tweet application.
+     * It dynamically determines the base URL of the application and defines essential
+     * constants for directory paths and URLs to various assets and application components
+     * (like CSS, uploads, views, controllers, and models).
+     * It handles both command-line interface (CLI) and web server execution environments.
+     */
     
-    // base_url_config
+    // https://yagudaev.com/posts/resolving-php-relative-path-problem/
+    
     if (php_sapi_name() === 'cli') {
         // CLI Mode: Dynamically calculate
         $protocol = 'http://';
