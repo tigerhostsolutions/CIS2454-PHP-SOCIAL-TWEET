@@ -23,14 +23,14 @@ It leverages **core PHP** for backend logic, **PDO** for database interaction, a
 - **User Authentication:**  
   Complete user registration, secure login via password hashing, and session-based logout.
 
-- **Tweet Management:**
-    - Compose and post new tweets
-    - View all tweets from your network (your own and those you follow)
-    - Like and unlike tweets
+- **Tweet Management:**  
+  - Compose and post new tweets  
+  - View all tweets from your network (your own and those you follow)  
+  - Like and unlike tweets
 
-- **User Relationships:**
-    - Follow/unfollow other users
-    - View lists of your followers and who you are following
+- **User Relationships:**  
+  - Follow/unfollow other users  
+  - View lists of your followers and who you are following
 
 - **User Profiles:**  
   Dedicated profile page displaying a user's own tweets, their followers, and who they are following.
@@ -63,6 +63,124 @@ It leverages **core PHP** for backend logic, **PDO** for database interaction, a
 ### Installation
 
 1. **Clone the repository:**
-   ```sh
-   git clone https://github.com/tigerhostsolutions/php-bad-twitter.git
-   cd php-bad-twitter
+    ```sh
+    git clone https://github.com/tigerhostsolutions/php-bad-twitter.git
+    cd php-bad-twitter
+    ```
+
+2. **Install Composer dependencies:**
+    ```sh
+    composer install
+    ```
+
+3. **Database Setup:**
+    - Create a new MySQL database (e.g., `php_bad_twitter`).
+    - Execute the following SQL schema:
+    ```sql
+    CREATE TABLE users (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      username VARCHAR(50) NOT NULL UNIQUE,
+      email VARCHAR(100) NOT NULL UNIQUE,
+      password VARCHAR(255) NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE tweets (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      content TEXT NOT NULL,
+      image_path VARCHAR(255),
+      likes_count INT DEFAULT 0,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+
+    CREATE TABLE likes (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      tweet_id INT NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      FOREIGN KEY (tweet_id) REFERENCES tweets(id) ON DELETE CASCADE,
+      UNIQUE (user_id, tweet_id)
+    );
+
+    CREATE TABLE follows (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      follower_id INT NOT NULL,
+      following_id INT NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (follower_id) REFERENCES users(id) ON DELETE CASCADE,
+      FOREIGN KEY (following_id) REFERENCES users(id) ON DELETE CASCADE,
+      UNIQUE (follower_id, following_id)
+    );
+    ```
+
+4. **Environment Configuration (`.env`):**
+    - Create a `.env` file in the project root:
+    ```
+    ENVIRONMENT=local
+    DB_LOCAL_HOST=localhost
+    DB_PORT=3306
+    DB_NAME=php_bad_twitter
+    DB_USER=your_db_username
+    DB_PASS=your_db_password
+    ```
+    - Ensure your web server can read this file.
+
+5. **Web Server Configuration:**
+    - **Apache Example:**
+      ```apache
+      <VirtualHost *:80>
+        DocumentRoot "/path/to/your/php-bad-twitter"
+        <Directory "/path/to/your/php-bad-twitter">
+          AllowOverride All
+          Require all granted
+        </Directory>
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+      </VirtualHost>
+      ```
+    - **PHP Built-in Server:**
+      ```sh
+      php -S localhost:8000
+      ```
+      Then open [http://localhost:8000](http://localhost:8000) in your browser.
+
+---
+
+## 🏃 Usage
+
+- **Register:** [http://localhost:8000/register.php](http://localhost:8000/register.php)
+- **Login:** [http://localhost:8000/login.php](http://localhost:8000/login.php)
+- **Main Feed:** [http://localhost:8000/](http://localhost:8000/)
+- **Profile Page:** [http://localhost:8000/profile.php](http://localhost:8000/profile.php)
+- **Logout:** [http://localhost:8000/logout.php](http://localhost:8000/logout.php)
+
+---
+
+## 📁 File Structure Overview
+📦 php-bad-twitter ├── config.php ├── index.php ├── login.php ├── logout.php ├── profile.php ├── register.php ├── uploads/ ├── vendor/ └── App/ ├── Controllers/ │ ├── TweetController.php │ └── UserController.php ├── Models/ │ ├── Database.php │ ├── Like.php │ ├── Tweet.php │ └── User.php └── Views/ ├── header.php ├── footer.php ├── profile.php └── tweets.php
+
+---
+
+## ⚠️ Important Notes
+
+- **Security:**  
+  This is a basic demonstration. For production, implement:
+  - Robust input validation and sanitization
+  - CSRF protection
+  - Stronger password hashing (e.g., Argon2id)
+  - Proper session handling
+  - Secure file upload handling
+
+- **Error Handling:**  
+  Add sophisticated logging, custom error pages, and controlled error reporting for production.
+
+- **Scalability:**  
+  For larger projects, consider advanced frameworks or architectural patterns.
+
+- **Missing Features:**  
+  Direct messaging, replies, user search, and pagination are not present.
+
+---
