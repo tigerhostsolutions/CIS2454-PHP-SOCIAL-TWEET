@@ -163,24 +163,3 @@ It leverages **core PHP** for backend logic, **PDO** for database interaction, a
 📦 php-bad-twitter ├── config.php ├── index.php ├── login.php ├── logout.php ├── profile.php ├── register.php ├── uploads/ ├── vendor/ └── App/ ├── Controllers/ │ ├── TweetController.php │ └── UserController.php ├── Models/ │ ├── Database.php │ ├── Like.php │ ├── Tweet.php │ └── User.php └── Views/ ├── header.php ├── footer.php ├── profile.php └── tweets.php
 
 ---
-
-## ⚠️ Important Notes
-
-- **Security:**  
-  This is a basic demonstration. For production, implement:
-  - Robust input validation and sanitization
-  - CSRF protection
-  - Stronger password hashing (e.g., Argon2id)
-  - Proper session handling
-  - Secure file upload handling
-
-- **Error Handling:**  
-  Add sophisticated logging, custom error pages, and controlled error reporting for production.
-
-- **Scalability:**  
-  For larger projects, consider advanced frameworks or architectural patterns.
-
-- **Missing Features:**  
-  Direct messaging, replies, user search, and pagination are not present.
-
----
