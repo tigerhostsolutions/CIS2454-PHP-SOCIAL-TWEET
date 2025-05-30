@@ -2,49 +2,55 @@ PHP Bad Twitter
 A simple, basic social media application built with PHP, demonstrating fundamental web development concepts including user management, tweet creation, and interactions like liking and following.
 
 📝 Description
-This project is a small-scale social media platform where users can register, log in, post tweets (with optional images), view a feed of tweets (including their own and those from users they follow), like/unlike tweets, and follow/unfollow other users. It's built with a focus on core PHP functionalities and basic MVC-like separation, utilizing PDO for database interactions and Composer for dependency management.
+This project provides a foundational social media experience where users can register, log in, post text-based tweets (with a placeholder for image uploads), view their own tweets, see tweets from users they follow, manage followers, and interact with tweets by liking them. It leverages core PHP for backend logic, PDO for database interaction, and uses vlucas/phpdotenv for environment variable management.
 
 ✨ Features
-User Authentication: Secure user registration, login, and logout.
+User Authentication: Complete user registration, secure login via password hashing, and session-based logout.
 
-Tweet Management: Create new tweets with text content and optional image uploads.
+Tweet Management:
 
-Tweet Feed: View a timeline of tweets, including those from followed users.
+Compose and post new tweets.
 
-User Interactions:
+View all tweets from your network (your own and those you follow).
 
-Like/Unlike: Users can like and unlike tweets.
+Like and unlike tweets.
 
-Follow/Unfollow: Users can follow and unfollow other users to customize their feed.
+User Relationships:
 
-User Profiles: Dedicated pages to view a user's own tweets, their followers, and who they are following.
+Follow other users to see their tweets in your feed.
 
-Environment Configuration: Utilizes .env files for managing sensitive credentials and environment-specific settings.
+Unfollow users.
+
+View lists of your followers and who you are following on your profile.
+
+User Profiles: Dedicated profile page displaying a user's own tweets, their followers, and who they are following.
+
+Centralized Configuration: Utilizes config.php for application-wide settings and .env for sensitive credentials.
 
 🛠️ Technologies Used
-PHP: Core backend logic and templating.
+PHP: Core backend logic and view rendering.
 
-MySQL: Relational database for storing user, tweet, like, and follow data.
+MySQL: Relational database for storing all application data (users, tweets, likes, follows).
 
-PDO: PHP Data Objects for secure and efficient database interaction.
+PDO: PHP Data Objects for secure and parameterized database queries.
 
-Composer: PHP dependency manager (specifically for vlucas/phpdotenv).
+Composer: PHP dependency manager.
 
-Dotenv: Library for loading environment variables from .env files.
+Dotenv (vlucas/phpdotenv): For loading environment variables from a .env file.
 
-HTML & CSS: For structuring and styling the web interface.
+HTML & CSS: For the basic structure and styling of the web interface.
 
 🚀 Getting Started
-Follow these steps to get a local copy of the project up and running on your machine.
+Follow these steps to set up and run the application locally.
 
 Prerequisites
 PHP 7.4 or higher
 
-MySQL (or a compatible database)
+Composer
 
-Composer (for dependency management)
+MySQL (or a compatible PDO-supported database)
 
-A web server (Apache, Nginx, or PHP's built-in server)
+A web server (e.g., Apache, Nginx, or PHP's built-in development server)
 
 Installation
 Clone the repository:
@@ -62,31 +68,31 @@ Database Setup:
 
 Create a new MySQL database (e.g., php_bad_twitter).
 
-Execute the following SQL schema to set up the necessary tables:
+Execute the following SQL schema to create the necessary tables:
 
 -- SQL Schema for php_bad_twitter database
 
--- Create users table
+-- users table: Stores user authentication and profile information
 CREATE TABLE users (
 id INT AUTO_INCREMENT PRIMARY KEY,
 username VARCHAR(50) NOT NULL UNIQUE,
 email VARCHAR(100) NOT NULL UNIQUE,
-password VARCHAR(255) NOT NULL, -- Hashed password
+password VARCHAR(255) NOT NULL, -- Stores hashed passwords (e.g., using password_hash())
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create tweets table
+-- tweets table: Stores user-generated tweets
 CREATE TABLE tweets (
 id INT AUTO_INCREMENT PRIMARY KEY,
 user_id INT NOT NULL,
 content TEXT NOT NULL,
-image_path VARCHAR(255), -- Optional image path
-likes_count INT DEFAULT 0,
+image_path VARCHAR(255), -- Stores path to optional uploaded images
+likes_count INT DEFAULT 0, -- Counter for likes
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Create likes table
+-- likes table: Records which user liked which tweet
 CREATE TABLE likes (
 id INT AUTO_INCREMENT PRIMARY KEY,
 user_id INT NOT NULL,
@@ -94,10 +100,10 @@ tweet_id INT NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
 FOREIGN KEY (tweet_id) REFERENCES tweets(id) ON DELETE CASCADE,
-UNIQUE (user_id, tweet_id) -- A user can like a tweet only once
+UNIQUE (user_id, tweet_id) -- Ensures a user can like a specific tweet only once
 );
 
--- Create follows table
+-- follows table: Records follow relationships between users
 CREATE TABLE follows (
 id INT AUTO_INCREMENT PRIMARY KEY,
 follower_id INT NOT NULL,
@@ -105,21 +111,20 @@ following_id INT NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (follower_id) REFERENCES users(id) ON DELETE CASCADE,
 FOREIGN KEY (following_id) REFERENCES users(id) ON DELETE CASCADE,
-UNIQUE (follower_id, following_id) -- A user can follow another user only once
+UNIQUE (follower_id, following_id) -- Ensures a user can follow another user only once
 );
 
-(Optional: You might want to add some dummy data for testing.)
+(Optional: Populate with dummy data for initial testing if desired.)
 
 Environment Configuration (.env):
 
-Create a file named .env in the project root directory (same level as composer.json).
+Create a file named .env in the project's root directory.
 
 Add your database credentials and application environment settings to it.
 
 ENVIRONMENT=local # Set to 'local' for development, 'production' for deployment
 
 DB_LOCAL_HOST=localhost
-DB_REMOTE_HOST=your_remote_db_host # If applicable
 DB_PORT=3306
 DB_NAME=php_bad_twitter
 DB_USER=your_db_username
@@ -129,9 +134,9 @@ Ensure your web server has read access to this file.
 
 Web Server Configuration:
 
-Document Root: Point your web server's document root to the project root directory (/php-bad-twitter/).
+Document Root: Point your web server's document root to the project's root directory (where index.php and config.php are located).
 
-For Apache, your Virtual Host might look something like this:
+For Apache (example Virtual Host):
 
 <VirtualHost *:80>
 DocumentRoot "/path/to/your/php-bad-twitter"
@@ -143,71 +148,87 @@ ErrorLog ${APACHE_LOG_DIR}/error.log
 CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 
-(Adjust /path/to/your/php-bad-twitter accordingly)
+(Adjust /path/to/your/php-bad-twitter to your actual path)
 
-For PHP's built-in server (for quick local testing):
+For PHP's built-in development server (for quick local testing):
 
 php -S localhost:8000
 
-Then open your browser to http://localhost:8000.
+Then open your web browser and navigate to http://localhost:8000.
 
 🏃 Usage
-Register: Navigate to http://localhost[:port]/register.php (or your configured URL) to create a new user account.
+Register: Go to http://localhost:8000/register.php to create a new user account.
 
-Login: After registration, or if you already have an account, log in via http://localhost[:port]/login.php.
+Login: Access http://localhost:8000/login.php to log into your account.
 
-Tweet Feed: Upon successful login, you will be redirected to index.php which displays the main tweet feed.
+Main Feed: After logging in, you'll be redirected to index.php (or /), which displays the main tweet feed.
 
-Profile: Access your profile via profile.php to see your tweets, followers, and who you're following.
+Profile Page: Visit http://localhost:8000/profile.php to see your own tweets, followers, and following.
 
-Logout: Use logout.php to end your session.
+Logout: Use http://localhost:8000/logout.php to end your session.
 
 📁 File Structure Overview
-config.php: Central configuration file for base URLs and directory paths.
+This project follows a basic organizational structure to separate concerns:
 
-index.php: The main entry point of the application, delegating to TweetController.
+config.php: Central file for application-wide constants and configurations.
 
-login.php: Handles user login.
+index.php: The primary entry point for the main tweet feed.
 
-logout.php: Handles user logout.
+login.php: Handles user authentication display and processing.
 
-profile.php: Entry point for the user profile page, delegating to UserController.
+logout.php: Manages session termination.
 
-register.php: Handles new user registration.
+profile.php: The entry point for user profile pages.
 
-uploads/: Directory for storing uploaded tweet images.
+register.php: Handles new user account creation.
 
-vendor/: Composer dependencies (e.g., phpdotenv).
+uploads/: (Implied) Directory for storing user-uploaded tweet images.
 
-App/: Contains the application's core logic.
+vendor/: Directory for Composer-managed third-party libraries.
 
-Controllers/: Handles incoming requests, processes data, and delegates to models/views.
+App/: Contains the core application logic.
 
-TweetController.php: Manages tweet-related actions (create, like, unlike).
+Controllers/: Manages incoming HTTP requests and orchestrates responses.
 
-UserController.php: Manages user profile and follow/unfollow actions.
+TweetController.php: Handles tweet creation, liking, and display logic for the main feed.
 
-Models/: Encapsulates database interactions and business logic.
+UserController.php: Manages user profile display, and follow/unfollow actions.
 
-Database.php: Manages PDO database connections.
+Models/: Encapsulates database interactions and business logic for specific data entities.
 
-Like.php: Handles liking and unliking tweets (used by Tweet model).
+Database.php: Manages the PDO database connection.
 
-Tweet.php: Manages tweet data (create, retrieve, like/unlike logic).
+Like.php: Defines methods for tweet liking/unliking.
 
-User.php: Manages user data and follow/unfollow relationships.
+Tweet.php: Defines methods for tweet creation, retrieval, and interaction counts.
 
-Views/: Contains HTML templates for different parts of the application.
+User.php: Defines methods for user authentication, retrieval, and follow relationships.
 
-header.php: Common HTML header.
+Views/: Contains PHP files that act as templates for the HTML output.
 
-footer.php: Common HTML footer.
+header.php: Reusable HTML header for all pages.
 
-tweets.php: The main tweet feed display.
+footer.php: Reusable HTML footer for all pages.
+
+profile.php: The HTML structure for the user profile page.
+
+tweets.php: The HTML structure for the main tweet feed page.
 
 ⚠️ Important Notes
-Security: This is a basic demonstration. For a production environment, additional security measures would be required (e.g., more robust input validation, CSRF protection, secure password hashing algorithms like Argon2id, proper error logging without exposing details to users, stricter file upload validation).
+Security: This project is a basic demonstration. For a production environment, comprehensive security measures are crucial, including but not limited to:
 
-Error Handling: Basic error handling is present, but could be enhanced with custom error pages and more sophisticated logging mechanisms.
+Robust input validation and sanitization (beyond htmlspecialchars).
 
-Scalability: The current model is simple. For large-scale applications, consider more advanced architectural patterns and database optimizations.
+CSRF (Cross-Site Request Forgery) protection.
+
+Using stronger password hashing algorithms (e.g., Argon2id if not already implicitly used by password_hash() in PHP 7.4+).
+
+Proper session handling (e.g., session fixation prevention).
+
+Secure file upload handling (validation, antivirus scanning, storing outside web root).
+
+Error Handling: While basic error handling is present, a production application would benefit from more sophisticated logging, custom error pages, and controlled error reporting.
+
+Scalability: This simple architecture may not scale efficiently for large user bases or complex features. Consider more advanced frameworks or architectural patterns for larger projects.
+
+Missing Features: Based on the submitted files, features like direct messaging, reply functionality, user search, or pagination for feeds are not present.
