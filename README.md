@@ -160,6 +160,58 @@ It leverages **core PHP** for backend logic, **PDO** for database interaction, a
 ---
 
 ## 📁 File Structure Overview
-📦 php-bad-twitter ├── config.php ├── index.php ├── login.php ├── logout.php ├── profile.php ├── register.php ├── uploads/ ├── vendor/ └── App/ ├── Controllers/ │ ├── TweetController.php │ └── UserController.php ├── Models/ │ ├── Database.php │ ├── Like.php │ ├── Tweet.php │ └── User.php └── Views/ ├── header.php ├── footer.php ├── profile.php └── tweets.php
-
+📦 php-bad-twitter
+├── config.php
+├── index.php
+├── login.php
+├── logout.php
+├── profile.php
+├── register.php
+├── uploads/
+├── vendor/
+└── App/
+    ├── Controllers/
+    │   ├── TweetController.php
+    │   └── UserController.php
+    ├── Models/
+    │   ├── Database.php
+    │   ├── Like.php
+    │   ├── Tweet.php
+    │   └── User.php
+    └── Views/
+        ├── header.php
+        ├── footer.php
+        ├── profile.php
+        └── tweets.php
 ---
+## ☁️ Deployment: AWS Elastic Beanstalk
+
+This project can be deployed on AWS Elastic Beanstalk for scalable PHP hosting.
+
+### Steps
+
+1. **Install the AWS CLI and EB CLI:**
+    ```sh
+    pip install awsebcli --upgrade
+    ```
+
+2. **Initialize Elastic Beanstalk:**
+    ```sh
+    eb init
+    ```
+
+3. **Create and deploy the environment:**
+    ```sh
+    eb create php-bad-twitter-env
+    eb deploy
+    ```
+
+4. **Open your application:**
+    ```sh
+    eb open
+    ```
+
+- Ensure your `.env` and database credentials are set up securely.
+- For persistent storage (e.g., `uploads/`), use Amazon S3.
+
+See [AWS Elastic Beanstalk PHP documentation](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-php.html) for more details.
