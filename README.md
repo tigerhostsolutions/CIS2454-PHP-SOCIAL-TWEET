@@ -1,4 +1,4 @@
-# PHP Bad Twitter
+# PHP Social Tweet
 
 A simple, basic social media application built with PHP, demonstrating fundamental web development concepts including user management, tweet creation, and interactions like liking and following.
 
